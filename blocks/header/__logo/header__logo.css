@@ -7,7 +7,7 @@
   background-repeat: no-repeat;
 }
 
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 445px) {
   .header__logo {
     min-width: 103px;
     min-height: 24px;

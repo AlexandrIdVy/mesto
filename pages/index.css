@@ -15,19 +15,16 @@
 @import url(../blocks/profile/__info-edit-btn/profile__info-edit-btn.css);
 @import url(../blocks/profile/__add-btn/profile__add-btn.css);
 
+@import url(../blocks/places/places.css);
+@import url(../blocks/place/place.css);
+@import url(../blocks/place/__image/place__image.css);
+@import url(../blocks/place/__title/place__title.css);
+@import url(../blocks/place/__like/place__like.css);
+@import url(../blocks/place/__like/_active/place__like_active.css);
+@import url(../blocks/place/__like/_active/place__like_no-active.css);
+
 @import url(../blocks/button/button.css);
 
-.places {
-}
-.place {
-}
-.place__image {
-}
-.place__title {
-}
-.place__like {
-}
-.place__like_no-active {
-}
-.footer {
-}
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copy/footer__copy.css);
+

@@ -8,7 +8,7 @@
   color: #FFFFFF;
 }
 
-@media  screen and (max-width: 321px) {
+@media  screen and (max-width: 445px) {
   .profile__info-title {
     margin: 0;
     font-size: 27px;

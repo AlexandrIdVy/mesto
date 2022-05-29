@@ -10,8 +10,15 @@
   background-position: center;
 }
 
-@media  screen and (max-width: 321px) {
+/* @media  screen and (max-width: 445px) {
+  .profile__add-btn {
+    min-width: 50px;
+  }
+} */
+
+@media  screen and (max-width: 445px) {
   .profile__add-btn {
     width: 100%;
+    justify-self: center;
   }
 }

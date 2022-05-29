@@ -4,16 +4,18 @@
   padding: 0;
   display: grid;
   align-items: center;
-  grid-template-columns: 120px minmax(282px, 336px) 1fr;
+  grid-template-columns: 120px 1fr 1fr;
   grid-template-areas:
   "avatar profile button";
-  gap: 30px;
 }
 
-@media  screen and (max-width: 321px) {
+@media  screen and (max-width: 445px) {
   .profile {
+    width: calc(100% - 38px);
     margin: 42px 19px 0 19px;
-    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    grid-template-columns: minmax(282px, 1fr);
     grid-template-areas:
     "avatar"
     "profile"
