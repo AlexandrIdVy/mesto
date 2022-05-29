@@ -1,21 +1,11 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts.css);
 
-.page {
-  margin: 0 auto;
-  padding: 0;
-  max-width: 880px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #000000;
-  font-family: 'Inter', 'Arial', sans-serif;
-}
+@import url(../blocks/page/page.css);
 
-.header {
-}
-.header__logo {
-}
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+
 .profile {
 }
 .profile__avatar-wrapper {
