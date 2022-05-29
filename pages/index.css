@@ -7,21 +7,146 @@
 @import url(../blocks/header/__logo/header__logo.css);
 
 .profile {
+  width: 100%;
+  margin: 40px 0 0 0;
+  padding: 0;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 120px minmax(282px, 336px) 1fr;
+  grid-template-areas:
+  "avatar profile button";
+  gap: 30px;
 }
+
+@media  screen and (max-width: 321px) {
+  .profile {
+    margin: 42px 19px 0 19px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "avatar"
+    "profile"
+    "button";
+    gap: 26px;
+  }
+}
+
 .profile__avatar-wrapper {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
 }
+
 .profile__avatar {
+  width: 100%;
+  grid-area: avatar;
 }
+
 .profile__info {
+  grid-area: profile;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  position: relative;
+  flex-direction: column;
 }
+
 .profile__info-title {
+  margin: 0 24px 0 0;
+  padding: 0;
+  font-style: medium;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  color: #FFFFFF;
 }
+
+@media  screen and (max-width: 321px) {
+  .profile__info-title {
+    margin: 0;
+    font-size: 27px;
+    line-height: 33px;
+  }
+}
+
 .profile__info-subtitle {
+  margin: 16px 0 0 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
 }
+
+@media  screen and (max-width: 321px) {
+  .profile__info-subtitle {
+    margin: 14px 0 10px 0;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
 .profile__info-edit-btn {
+  position: absolute;
+  top: 15px;
+  right: 0;
+  min-width: 24px;
+  min-height: 24px;
+  border: 1px solid #FFFFFF;
+  background-color: #000000;
 }
+
+@media  screen and (max-width: 321px) {
+  .profile__info-edit-btn {
+    top: 8px;
+    right: 19px;
+    min-width: 18px;
+    min-height: 18px;
+  }
+}
+
+@media  screen and (max-width: 321px) {
+  .pencil {
+    max-width: 8px;
+  }
+}
+
+@media  screen and (max-width: 321px) {
+  .plus {
+    max-width: 16px;
+  }
+}
+
 .profile__add-btn {
+  grid-area: button;
+  justify-self: end;
+  min-width: 150px;
+  min-height: 50px;
+  border: 1px solid #FFFFFF;
+  background-color: #000000;
+  color: #FFFFFF;
 }
+
+@media  screen and (max-width: 321px) {
+  .profile__add-btn {
+    width: 100%;
+  }
+}
+
+.button {
+  transition: opacity 0.4s ease
+}
+
+.button:focus {
+  opacity: 0.6;
+}
+
+.button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
 .places {
 }
 .place {
