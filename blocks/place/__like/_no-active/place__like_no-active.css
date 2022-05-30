@@ -1,2 +1,5 @@
 .place__like_no-active {
+  background-image: url(../../../../images/like.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
