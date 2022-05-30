@@ -1,17 +1,53 @@
-# Проект: Место
+**[RU](#Место)** [EN](#Mesto)
 
-### Обзор
+# Место
 
-* Figma
-* Картинки
+<div align="center">
+<img src="https://github.com/AlexandrIdVy/mesto/blob/main/images/demo.png">
+</div>
 
-**Figma**
+## Проектная работа 4 (Яндекс.Практикум)
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+Страница профиля социальной сети с фотографиями исследованных мест России.
 
-**Картинки**
+**Размещение проекта на GitHub**
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
+* [Место](https://alexandridvy.github.io/mesto/)
 
-Удачи!
+---
+### Технологии в проекте
+
+* БЭМ-методология (код, файловая структура)
+* Аадаптивная верстка (до 320px с помощью медиазапросов)
+* Flexbox
+* Grid Layout
+* CSS-позиционирование
+* Локальное подключение шрифта
+* JavaScript (редактирование данных профиля, модальное окно)
+
+[RU](#Место) **[EN](#Mesto)**
+
+# Mesto
+
+<div align="center">
+<img src="https://github.com/AlexandrIdVy/mesto/blob/main/images/demo.png">
+</div>
+
+## Project work 4 (Yandex.Praktikum - additional education courses)
+
+A social network profile page with photos of explored places in Russia.
+
+**Project to GitHub:**
+
+* [Mesto](https://alexandridvy.github.io/mesto/)
+
+---
+### Technologies in the project
+
+* BEM methodology (code, file structure)
+* Adaptive layouts with media queries (up to 320px)
+* Flexbox
+* Grid Layout
+* CSS positioning elements
+* Use local font
+* JavaScript (profile edit data, popup window)
