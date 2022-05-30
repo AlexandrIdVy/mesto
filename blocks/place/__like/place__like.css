@@ -3,5 +3,7 @@
   min-width: 22px;
   min-height: 19px;
   border: none;
-  background-color: #FFFFFF;
+  background-color: transparent;
+  overflow: hidden;
+  outline: none;
 }
