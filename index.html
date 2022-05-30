@@ -57,14 +57,15 @@
   <footer class="footer">
     <p class="footer__copy">&copy; 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
-    <form action="" class="edit">
+  <div class="popup popup_hidden">
+    <form class="edit">
       <button class="edit__close-btn button"><img src="./images/Close-Icon.svg" alt="Закрыть окно редактирования профиля" class="edit__image-close-btn"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input type="text" class="edit__name edit__input" name="name" placeholder="Ваше имя?" required>
-      <input type="text" class="edit__description edit__input" name="description" placeholder="Чем Вы занимаетесь?" required>
+      <input type="text" class="edit__name edit__input" placeholder="Ваше имя?" required>
+      <input type="text" class="edit__description edit__input" placeholder="Чем Вы занимаетесь?" required>
       <button class="edit__save-btn button">Сохранить</button>
     </form>
   </div>
+  <script src="./script/script.js"></script>
 </body>
 </html>
