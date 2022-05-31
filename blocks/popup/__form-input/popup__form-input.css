@@ -1,4 +1,4 @@
-.edit__input {
+.popup__form-input {
   margin: 0 0 30px 0;
   padding: 0 0 13px 0;;
   border: 0;
@@ -15,26 +15,26 @@
   outline: none;
 }
 
-.edit__input::placeholder {
+.popup__form-input::placeholder {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
 }
 
-.edit__input::-webkit-input-placeholder {
+.popup__form-input::-webkit-input-placeholder {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
 }
-.edit__input::-moz-placeholder {
+.popup__form-input::-moz-placeholder {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
 }
-.edit__input::-ms-input-placeholder {
+.popup__form-input::-ms-input-placeholder {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
