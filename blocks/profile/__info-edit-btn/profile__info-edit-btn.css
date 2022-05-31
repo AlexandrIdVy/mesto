@@ -9,7 +9,7 @@
   background-image: url(../../../images/pencil.svg);
 }
 
-@media  screen and (max-width: 445px) {
+@media  screen and (max-width: 768px) {
   .profile__info-edit-btn {
     top: 8px;
     right: 19px;

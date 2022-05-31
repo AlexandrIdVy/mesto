@@ -4,7 +4,7 @@
   flex: 1;
 }
 
-@media screen and (max-width: 445px) {
+@media screen and (max-width: 768px) {
   .footer {
     margin: 0 19px 48px 19px;
   }

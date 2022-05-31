@@ -11,7 +11,7 @@
   border: none;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 768px) {
   .edit__close-btn {
     width: 20px;
     height: 20px;

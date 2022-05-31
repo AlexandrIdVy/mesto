@@ -9,7 +9,7 @@
   "avatar profile button";
 }
 
-@media  screen and (max-width: 445px) {
+@media  screen and (max-width: 768px) {
   .profile {
     margin: 42px auto;
     justify-items: center;

@@ -8,21 +8,21 @@ const formEdit = document.querySelector('.edit');
 const nameProfile = document.querySelector('.profile__info-title');
 const descriptionProfile = document.querySelector('.profile__info-subtitle');
 
-const nameEdit = document.querySelector('.edit__input_name');
-const descriptionEdit = document.querySelector('.edit__input_description');
+const nameEdit = document.querySelector('.edit__input_type_name-on');
+const descriptionEdit = document.querySelector('.edit__input_type_description-on');
 
 // открытие окна
 function popupOpen() {
   popup.classList.add('popup_opened');
   nameEdit.value = nameProfile.textContent;
   descriptionEdit.value = descriptionProfile.textContent;
-  document.addEventListener('keypress', editProfileKey);
 }
 
 // закрытие окна
 function popupClose() {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keypress', editProfileKey);
+  nameEdit.value = '';
+  descriptionEdit.value = '';
 }
 
 // проверка области клика при закрытии окна
@@ -38,15 +38,6 @@ function formSubmitHandler (e) {
   nameProfile.textContent = nameEdit.value;
   descriptionProfile.textContent = descriptionEdit.value;
   popupClose();
-  nameEdit.value = '';
-  descriptionEdit.value = '';
-}
-
-// замена имени и описания в профиле по нажатию enter
-function editProfileKey(e) {
-  if (e.code === 'Enter') {
-    formSubmitHandler(e);
-  }
 }
 
 editButton.addEventListener('click', popupOpen);
