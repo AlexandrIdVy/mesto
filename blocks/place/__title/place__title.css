@@ -1,5 +1,5 @@
 .place__title {
-  width: calc(100% - 95px);
+  max-width: calc(100% - 95px);
   margin: 0;
   padding: 25px 0 31px 21px;
   font-style: normal;

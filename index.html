@@ -11,61 +11,61 @@
   <header class="header">
     <div class="header__logo"></div>
   </header>
-  <section class="profile">
-    <div class="profile__avatar-wrapper">
+  <main class="content">
+    <section class="profile">
       <img src="./images/avatar.png" alt="Аватар профиля" class="profile__avatar">
-    </div>
-    <div class="profile__info">
-      <h1 class="profile__info-title">Жак-Ив Кусто</h1>
-      <p class="profile__info-subtitle">Исследователь океана</p>
-      <button class="profile__info-edit-btn button"></button>
-    </div>
-    <button class="profile__add-btn button"></button>
-  </section>
-  <section class="places">
-    <article class="place">
-      <img src="./images/kirill-pershin-1088404-unsplash.png" alt="Карачаево-черкесия" class="place__image">
-      <h2 class="place__title">Карачаево-черкесия</h2>
-      <button class="place__like place__like_no-active button"></button>
-    </article>
-    <article class="place">
-      <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Домбай" class="place__image">
-      <h2 class="place__title">Домбай</h2>
-      <button class="place__like place__like_no-active button"></button>
-    </article>
-    <article class="place">
-      <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Гора Эльбрус" class="place__image">
-      <h2 class="place__title">Гора Эльбрус</h2>
-      <button class="place__like place__like_no-active button"></button>
-    </article>
-    <article class="place">
-      <img src="./images/kirill-pershin-1088404-unsplash.png" alt="Карачаево-черкесия" class="place__image">
-      <h2 class="place__title">Карачаево-черкесия</h2>
-      <button class="place__like place__like_no-active button"></button>
-    </article>
-    <article class="place">
-      <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Домбай" class="place__image">
-      <h2 class="place__title">Домбай</h2>
-      <button class="place__like place__like_no-active button"></button>
-    </article>
-    <article class="place">
-      <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Гора Эльбрус" class="place__image">
-      <h2 class="place__title">Гора Эльбрус</h2>
-      <button class="place__like place__like_no-active button"></button>
-    </article>
-  </section>
+      <div class="profile__info">
+        <h1 class="profile__info-title">Жак-Ив Кусто</h1>
+        <p class="profile__info-subtitle">Исследователь океана</p>
+        <button type="button" class="profile__info-edit-btn button"></button>
+      </div>
+      <button type="button" class="profile__add-btn button"></button>
+    </section>
+    <section class="places">
+      <article class="place">
+        <img src="./images/kirill-pershin-1088404-unsplash.png" alt="Карачаево-черкесия" class="place__image">
+        <h2 class="place__title">Карачаево-черкесия</h2>
+        <button type="button" class="place__like-btn button"></button>
+      </article>
+      <article class="place">
+        <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Домбай" class="place__image">
+        <h2 class="place__title">Домбай</h2>
+        <button type="button" class="place__like-btn button"></button>
+      </article>
+      <article class="place">
+        <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Гора Эльбрус" class="place__image">
+        <h2 class="place__title">Гора Эльбрус</h2>
+        <button type="button" class="place__like-btn button"></button>
+      </article>
+      <article class="place">
+        <img src="./images/kirill-pershin-1088404-unsplash.png" alt="Карачаево-черкесия" class="place__image">
+        <h2 class="place__title">Карачаево-черкесия</h2>
+        <button type="button" class="place__like-btn button"></button>
+      </article>
+      <article class="place">
+        <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Домбай" class="place__image">
+        <h2 class="place__title">Домбай</h2>
+        <button type="button" class="place__like-btn button"></button>
+      </article>
+      <article class="place">
+        <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Гора Эльбрус" class="place__image">
+        <h2 class="place__title">Гора Эльбрус</h2>
+        <button type="button" class="place__like-btn button"></button>
+      </article>
+    </section>
+  </main>
   <footer class="footer">
     <p class="footer__copy">&copy; 2020 Mesto Russia</p>
   </footer>
-  <div class="popup popup_hidden">
-    <form class="edit">
+  <div class="popup">
+    <form name="edit-form" class="edit">
       <button class="edit__close-btn button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input type="text" class="edit__name edit__input" placeholder="Ваше имя?" required>
-      <input type="text" class="edit__description edit__input" placeholder="Чем Вы занимаетесь?" required>
-      <button class="edit__save-btn button">Сохранить</button>
+      <input type="text" class="edit__input edit__input_name" name="profile-name" placeholder="Ваше имя?" required>
+      <input type="text" class="edit__input edit__input_description" name="profile-description" placeholder="Чем Вы занимаетесь?" required>
+      <button type="submit" class="edit__save-btn button">Сохранить</button>
     </form>
   </div>
-  <script src="./blocks/popup/popup.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>

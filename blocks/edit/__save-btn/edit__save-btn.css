@@ -1,6 +1,5 @@
 .edit__save-btn {
   margin: 48px 0 0 0;
-  padding: 0;
   height: 50px;
   border-radius: 2px;
   background-color: #000000;
@@ -9,7 +8,6 @@
   font-size: 18px;
   line-height: 22px;
   color: #FFFFFF;
-  outline: none;
   border: none;
 }
 

@@ -1,5 +1,5 @@
 .edit {
-  margin: 195px 0 0 0;
+  margin: 0;
   padding: 34px 36px 37px 36px;
   min-width: 430px;
   background-color: #FFFFFF;
@@ -12,7 +12,7 @@
 
 @media screen and (max-width: 550px) {
   .edit {
-    margin: 123px 19px 0 19px;
+    margin: 0 19px 0 19px;
     padding: 25px 22px 25px 22px;
     min-width: 282px;
   }

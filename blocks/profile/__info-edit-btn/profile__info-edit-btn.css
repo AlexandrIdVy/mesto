@@ -7,8 +7,6 @@
   border: 1px solid #FFFFFF;
   background-color: #000000;
   background-image: url(../../../images/pencil.svg);
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 @media  screen and (max-width: 445px) {

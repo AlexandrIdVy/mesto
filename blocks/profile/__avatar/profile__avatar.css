@@ -1,4 +1,7 @@
 .profile__avatar {
-  width: 100%;
   grid-area: avatar;
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
 }

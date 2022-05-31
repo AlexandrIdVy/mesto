@@ -1,20 +1,18 @@
 .profile {
   width: 100%;
-  margin: 40px 0 0 0;
+  margin: 40px auto;
   padding: 0;
   display: grid;
   align-items: center;
-  grid-template-columns: 120px 1fr 1fr;
+  grid-template-columns: 120px minmax(282px, 366px) 1fr;
   grid-template-areas:
   "avatar profile button";
 }
 
 @media  screen and (max-width: 445px) {
   .profile {
-    width: calc(100% - 38px);
-    margin: 42px 19px 0 19px;
+    margin: 42px auto;
     justify-items: center;
-    text-align: center;
     grid-template-columns: minmax(282px, 1fr);
     grid-template-areas:
     "avatar"

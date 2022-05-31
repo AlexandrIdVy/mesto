@@ -1,24 +1,19 @@
 const editButton = document.querySelector('.profile__info-edit-btn');
 
 const popup = document.querySelector('.popup');
-const closeButton = document.querySelector('.edit__close-btn');
+const popupCloseButton = document.querySelector('.edit__close-btn');
 
 const formEdit = document.querySelector('.edit');
 
-let nameProfile = document.querySelector('.profile__info-title');
-let descriptionProfile = document.querySelector('.profile__info-subtitle');
+const nameProfile = document.querySelector('.profile__info-title');
+const descriptionProfile = document.querySelector('.profile__info-subtitle');
 
-let nameEdit = document.querySelector('.edit__name');
-let descriptionEdit = document.querySelector('.edit__description');
-
-editButton.addEventListener('click', popupOpen);
-closeButton.addEventListener('click', popupClose);
-popup.addEventListener('click', popupCloseAll);
-formEdit.addEventListener('submit', formSubmitHandler);
+const nameEdit = document.querySelector('.edit__input_name');
+const descriptionEdit = document.querySelector('.edit__input_description');
 
 // открытие окна
 function popupOpen() {
-  popup.classList.remove('popup_hidden');
+  popup.classList.add('popup_opened');
   nameEdit.value = nameProfile.textContent;
   descriptionEdit.value = descriptionProfile.textContent;
   document.addEventListener('keypress', editProfileKey);
@@ -26,7 +21,7 @@ function popupOpen() {
 
 // закрытие окна
 function popupClose() {
-  popup.classList.add('popup_hidden');
+  popup.classList.remove('popup_opened');
   document.removeEventListener('keypress', editProfileKey);
 }
 
@@ -43,6 +38,8 @@ function formSubmitHandler (e) {
   nameProfile.textContent = nameEdit.value;
   descriptionProfile.textContent = descriptionEdit.value;
   popupClose();
+  nameEdit.value = '';
+  descriptionEdit.value = '';
 }
 
 // замена имени и описания в профиле по нажатию enter
@@ -51,3 +48,8 @@ function editProfileKey(e) {
     formSubmitHandler(e);
   }
 }
+
+editButton.addEventListener('click', popupOpen);
+popupCloseButton.addEventListener('click', popupClose);
+popup.addEventListener('click', popupCloseAll);
+formEdit.addEventListener('submit', formSubmitHandler);
