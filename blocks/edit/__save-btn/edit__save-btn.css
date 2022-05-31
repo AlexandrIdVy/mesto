@@ -1,5 +1,5 @@
 .edit__save-btn {
-  margin: 48px 0 0 0;
+  margin: 18px 0 0 0;
   height: 50px;
   border-radius: 2px;
   background-color: #000000;
@@ -11,9 +11,9 @@
   border: none;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 768px) {
   .edit__save-btn {
-    margin: 45px 0 0 0;
+    margin: 15px 0 0 0;
     font-size: 14px;
     line-height: 17px;
   }
