@@ -31,12 +31,11 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 
-@import url(../blocks/edit/edit.css);
-@import url(../blocks/edit/__title/edit__title.css);
-@import url(../blocks/edit/__close-btn/edit__close-btn.css);
-@import url(../blocks/edit/__save-btn/edit__save-btn.css);
-@import url(../blocks/edit/__input/edit__input.css);
-@import url(../blocks/edit/__input/_type/edit__input_type_name-on.css);
-@import url(../blocks/edit/__input/_type/edit__input_type_description-on.css);
-
-
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__form-input/popup__form-input.css);
+@import url(../blocks/popup/__form-input/_type/popup__form-input_type_name-on.css);
+@import url(../blocks/popup/__form-input/_type/popup__form-input_type_description-on.css);
+@import url(../blocks/popup/__form-save-btn/popup__form-save-btn.css);
+@import url(../blocks/popup/__close-btn/popup__close-btn.css);

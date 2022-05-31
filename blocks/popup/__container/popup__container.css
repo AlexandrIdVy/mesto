@@ -1,19 +1,16 @@
-.edit {
-  margin: 191px 0 0 0;
+.popup__container {
+  margin: auto;
   padding: 34px 36px 37px 36px;
-  min-width: 430px;
+  max-width: 430px;
   background-color: #FFFFFF;
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
   box-sizing: border-box;
   position: relative;
 }
 
 @media screen and (max-width: 768px) {
-  .edit {
-    margin: 123px 19px 0 19px;
+  .popup__container {
     padding: 25px 22px 25px 22px;
-    min-width: 282px;
+    max-width: 282px;
   }
 }

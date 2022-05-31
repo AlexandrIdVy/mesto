@@ -1,15 +1,15 @@
 const editButton = document.querySelector('.profile__info-edit-btn');
 
 const popup = document.querySelector('.popup');
-const popupCloseButton = document.querySelector('.edit__close-btn');
+const popupCloseButton = document.querySelector('.popup__close-btn');
 
-const formEdit = document.querySelector('.edit');
+const formEdit = document.querySelector('.popup__form');
 
 const nameProfile = document.querySelector('.profile__info-title');
 const descriptionProfile = document.querySelector('.profile__info-subtitle');
 
-const nameEdit = document.querySelector('.edit__input_type_name-on');
-const descriptionEdit = document.querySelector('.edit__input_type_description-on');
+const nameEdit = document.querySelector('.popup__form-input_type_name-on');
+const descriptionEdit = document.querySelector('.popup__form-input_type_description-on');
 
 // открытие окна
 function popupOpen() {
