@@ -21,11 +21,13 @@ function popupOpen() {
   popup.classList.remove('popup_hidden');
   nameEdit.value = nameProfile.textContent;
   descriptionEdit.value = descriptionProfile.textContent;
+  document.addEventListener('keypress', editProfileKey);
 }
 
 // закрытие окна
 function popupClose() {
   popup.classList.add('popup_hidden');
+  document.removeEventListener('keypress', editProfileKey);
 }
 
 // проверка области клика при закрытии окна
@@ -41,4 +43,11 @@ function formSubmitHandler (e) {
   nameProfile.textContent = nameEdit.value;
   descriptionProfile.textContent = descriptionEdit.value;
   popupClose();
+}
+
+// замена имени и описания в профиле по нажатию enter
+function editProfileKey(e) {
+  if (e.code === 'Enter') {
+    formSubmitHandler(e);
+  }
 }

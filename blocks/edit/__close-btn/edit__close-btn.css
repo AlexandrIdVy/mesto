@@ -6,8 +6,10 @@
   height: 32px;
   top: -40px;
   right: -40px;
+  background-image: url(../../../images/Close-Icon.svg);
   background-color: transparent;
   background-repeat: no-repeat;
+  background-size: contain;
   border: none;
   overflow: hidden;
   outline: none;

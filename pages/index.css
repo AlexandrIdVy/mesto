@@ -34,7 +34,6 @@
 
 @import url(../blocks/edit/edit.css);
 @import url(../blocks/edit/__close-btn/edit__close-btn.css);
-@import url(../blocks/edit/__image-close-btn/edit__image-close-btn.css);
 @import url(../blocks/edit/__name/edit__name.css);
 @import url(../blocks/edit/__description/edit__description.css);
 @import url(../blocks/edit/__save-btn/edit__save-btn.css);
