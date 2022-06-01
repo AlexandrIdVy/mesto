@@ -1,7 +1,7 @@
 .place__title {
-  max-width: calc(100% - 95px);
+  max-width: 282px;
   margin: 0;
-  padding: 25px 0 31px 21px;
+  padding: 25px 70px 31px 21px;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
@@ -10,4 +10,5 @@
   white-space: nowrap;
   overflow: hidden;
   color: #000000;
+  background-color: #FFFFFF;
 }
