@@ -11,24 +11,25 @@ const descriptionProfile = document.querySelector('.profile__info-subtitle');
 const nameEdit = document.querySelector('.popup__form-input_type_name-on');
 const descriptionEdit = document.querySelector('.popup__form-input_type_description-on');
 
-// открытие окна
-function popupOpen() {
-  popup.classList.add('popup_opened');
-  nameEdit.value = nameProfile.textContent;
-  descriptionEdit.value = descriptionProfile.textContent;
-}
+// открытие-закрытие popup
+function popupOpenClose() {
 
-// закрытие окна
-function popupClose() {
-  popup.classList.remove('popup_opened');
-  nameEdit.value = '';
-  descriptionEdit.value = '';
+   if (!popup.classList.contains('popup_opened')) {
+    nameEdit.value = nameProfile.textContent;
+    descriptionEdit.value = descriptionProfile.textContent;
+  }
+  else {
+    nameEdit.value = '';
+    descriptionEdit.value = '';
+  }
+
+  popup.classList.toggle('popup_opened');
 }
 
 // проверка области клика при закрытии окна
-function popupCloseAll(e) {
+function popupCloseClick(e) {
   if (e.target === e.currentTarget) {
-    popupClose();
+    popupOpenClose();
   }
 }
 
@@ -37,10 +38,10 @@ function formSubmitHandler (e) {
   e.preventDefault();
   nameProfile.textContent = nameEdit.value;
   descriptionProfile.textContent = descriptionEdit.value;
-  popupClose();
+  popupOpenClose();
 }
 
-editButton.addEventListener('click', popupOpen);
-popupCloseButton.addEventListener('click', popupClose);
-popup.addEventListener('click', popupCloseAll);
+editButton.addEventListener('click', popupOpenClose);
+popupCloseButton.addEventListener('click', popupOpenClose);
+popup.addEventListener('click', popupCloseClick);
 formEdit.addEventListener('submit', formSubmitHandler);
