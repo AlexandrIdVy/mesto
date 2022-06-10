@@ -1,7 +1,7 @@
 const editButton = document.querySelector('.profile__info-edit-btn');
 
 const places = document.querySelector('.places');
-const likeButton = document.querySelectorAll('.place__like-btn');
+const likeButtons = document.querySelectorAll('.place__like-btn');
 
 const popup = document.querySelector('.popup');
 const popupCloseButton = document.querySelector('.popup__close-btn');
@@ -15,7 +15,7 @@ const nameEdit = document.querySelector('.popup__form-input_type_name-on');
 const descriptionEdit = document.querySelector('.popup__form-input_type_description-on');
 
 // открытие-закрытие popup
-function popupOpenClose() {
+function openClosePopup() {
 
   if (!popup.classList.contains('popup_opened')) {
     nameEdit.value = nameProfile.textContent;
@@ -30,31 +30,31 @@ function popupOpenClose() {
 }
 
 // проверка области клика при закрытии окна
-function popupCloseClick(e) {
+function checkCloseClickPopup(e) {
   if (e.target === e.currentTarget) {
-    popupOpenClose();
+    openClosePopup();
   }
 }
 
 // замена имени и описания в профиле
-function formSubmitHandler (e) {
+function formSubmitHandler(e) {
   e.preventDefault();
   nameProfile.textContent = nameEdit.value;
   descriptionProfile.textContent = descriptionEdit.value;
-  popupOpenClose();
+  openClosePopup();
 }
 
 // добавление лайка
 function addLike(e) {
-  for (let i = 0; i < likeButton.length; i++) {
-    if (e.target.contains(likeButton[i])) {
+  likeButtons.forEach(element => {
+    if (e.target.contains(element)) {
       e.target.classList.toggle('place__like-btn_active');
     }
-  }
+  });
 }
 
-editButton.addEventListener('click', popupOpenClose);
-popupCloseButton.addEventListener('click', popupOpenClose);
-popup.addEventListener('click', popupCloseClick);
+editButton.addEventListener('click', openClosePopup);
+popupCloseButton.addEventListener('click', openClosePopup);
+popup.addEventListener('click', checkCloseClickPopup);
 formEdit.addEventListener('submit', formSubmitHandler);
 places.addEventListener('click', addLike);
