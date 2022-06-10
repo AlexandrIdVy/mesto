@@ -1,9 +1,12 @@
-const editButton = document.querySelector('.profile__info-edit-btn');
+const editProfileButton = document.querySelector('.profile__info-edit-btn');
+const placeAddButton = document.querySelector('.profile__add-btn');
 
 const places = document.querySelector('.places');
 
-const popup = document.querySelector('.popup');
-const popupCloseButton = document.querySelector('.popup__close-btn');
+const popupEditProfile = document.querySelector('.popup__edit-profile');
+const popupAddPlace = document.querySelector('.popup__add-place');
+const btnCloseEditProfile = document.querySelector('.button_editing');
+const btnCloseAddPlace = document.querySelector('.button_creating');
 
 const formEdit = document.querySelector('.popup__form');
 
@@ -41,9 +44,13 @@ const initialCards = [
 ];
 
 // открытие-закрытие popup
-function openClosePopup() {
+function openClosePopup(popup) {
+  popup.classList.toggle('popup_opened');
+}
 
-  if (!popup.classList.contains('popup_opened')) {
+function getPopupEditProfile() {
+
+  if (!popupEditProfile.classList.contains('popup_opened')) {
     nameEdit.value = nameProfile.textContent;
     descriptionEdit.value = descriptionProfile.textContent;
   }
@@ -52,13 +59,19 @@ function openClosePopup() {
     descriptionEdit.value = '';
   }
 
-  popup.classList.toggle('popup_opened');
+  openClosePopup(popupEditProfile);
+}
+
+function getPopupAddPlace() {
+  openClosePopup(popupAddPlace);
 }
 
 // проверка области клика при закрытии popup
-function checkCloseClickPopup(evt) {
-  if (evt.target === evt.currentTarget) {
-    openClosePopup();
+function checkCloseClickPopup(popup) {
+  return function (evt) {
+    if (evt.target === evt.currentTarget) {
+      openClosePopup(popup);
+    }
   }
 }
 
@@ -67,10 +80,10 @@ function formSubmitHandler(evt) {
   evt.preventDefault();
   nameProfile.textContent = nameEdit.value;
   descriptionProfile.textContent = descriptionEdit.value;
-  openClosePopup();
+  openClosePopup(popupEditProfile);
 }
 
-// доюавление шаблона place
+// добавление шаблона place
 function addPlace(namePlace, linkImage) {
   const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.place').cloneNode(true);
@@ -85,11 +98,13 @@ function addPlace(namePlace, linkImage) {
   places.append(placeElement);
 }
 
-initialCards.forEach(element => {
-  addPlace(element.name, element.link);
-});
+initialCards.forEach(element => { addPlace(element.name, element.link); });
 
-editButton.addEventListener('click', openClosePopup);
-popupCloseButton.addEventListener('click', openClosePopup);
-popup.addEventListener('click', checkCloseClickPopup);
+editProfileButton.addEventListener('click', () => { getPopupEditProfile(); });
+placeAddButton.addEventListener('click', () => { getPopupAddPlace(); });
+btnCloseEditProfile.addEventListener('click', () => { openClosePopup(popupEditProfile); });
+btnCloseAddPlace.addEventListener('click', () => { openClosePopup(popupAddPlace); });
+popupEditProfile.addEventListener('click', () => { checkCloseClickPopup(popupEditProfile); } );
+popupEditProfile.addEventListener('click', () => { checkCloseClickPopup(popupAddPlace); } );
 formEdit.addEventListener('submit', formSubmitHandler);
+
