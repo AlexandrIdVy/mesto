@@ -5,6 +5,7 @@ const places = document.querySelector('.places');
 
 const popupEditProfile = document.querySelector('.popup__edit-profile');
 const popupAddPlace = document.querySelector('.popup__add-place');
+const popupImagePlace = document.querySelector('.popup__image-place');
 const btnCloseEditProfile = document.querySelector('.button_editing');
 const btnCloseAddPlace = document.querySelector('.button_creating');
 
@@ -18,6 +19,8 @@ const nameEdit = document.querySelector('.popup__form-input_type_name-on');
 const descriptionEdit = document.querySelector('.popup__form-input_type_description-on');
 const namePlace = document.querySelector('.popup__form-input_type_place-on');
 const linkForPlace = document.querySelector('.popup__form-input_type_link-on');
+const imagePlace = document.querySelector('.popup__image');
+const imagePlaceCaption = document.querySelector('.popup__image-caption');
 
 const initialCards = [
   {
@@ -99,7 +102,13 @@ function addPlace(namePlace, linkImage) {
   placeElement.querySelector('.place__image').src = linkImage;
   placeElement.querySelector('.place__image').alt = 'Фото ' + namePlace;
   placeElement.querySelector('.place__title').textContent = namePlace;
-  placeElement.querySelector('.place__like-btn').addEventListener('click', evt => {
+  placeElement.querySelector('.place__image').addEventListener('click', (evt) => {
+    imagePlace.src = linkImage;
+    imagePlace.alt = namePlace;
+    imagePlaceCaption.textContent = namePlace;
+    openClosePopup(popupImagePlace);
+  });
+  placeElement.querySelector('.place__like-btn').addEventListener('click', (evt) => {
     evt.target.classList.toggle('place__like-btn_active');
   });
   placeElement.querySelector('.place__trash-btn').addEventListener('click', () => {
