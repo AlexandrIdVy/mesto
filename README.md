@@ -23,7 +23,14 @@
 * Grid Layout
 * CSS-позиционирование
 * Локальное подключение шрифта
-* JavaScript (редактирование данных профиля, модальное окно)
+* JavaScript (модальные окна редактирование данных профиля, добавление изображений, просмотр изображений)
+  * Метод querySelector
+  * Свойство classList
+  * template-элементы
+  * Объект event
+  * Обработчик событий addEventListener
+  * Условные конструкции, циклы, массивы
+
 
 [RU](#Место) **[EN](#Mesto)**
 
@@ -50,4 +57,10 @@ A social network profile page with photos of explored places in Russia.
 * Grid Layout
 * CSS positioning elements
 * Use local font
-* JavaScript (profile edit data, popup window)
+* JavaScript (popup windowы profile edit data, add images, viewing images)
+  * Method querySelector
+  * Property classList
+  * Template elements
+  * Object event
+  * Method addEventListener
+  * Conditional statements, loops, arrays

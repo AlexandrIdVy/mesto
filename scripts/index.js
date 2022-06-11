@@ -5,9 +5,9 @@ const places = document.querySelector('.places');
 
 const btnEditProfile = document.querySelector('.profile__info-edit-btn');
 const btnAddPlace = document.querySelector('.profile__add-btn');
-const btnCloseEditProfile = document.querySelector('.button_editing');
-const btnCloseAddPlace = document.querySelector('.button_creating');
-const btnCloseImagePlace = document.querySelector('.button_viewing');
+const btnCloseEditProfile = document.querySelector('.button_type_close-editing');
+const btnCloseAddPlace = document.querySelector('.button_type_close-creating');
+const btnCloseImagePlace = document.querySelector('.button_type_close-viewing');
 
 const popupEditProfile = document.querySelector('.popup__edit-profile');
 const popupAddPlace = document.querySelector('.popup__add-place');

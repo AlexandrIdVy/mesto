@@ -21,8 +21,7 @@
       </div>
       <button type="button" class="profile__add-btn button"></button>
     </section>
-    <section class="places">
-    </section>
+    <section class="places"></section>
   </main>
   <footer class="footer">
     <p class="footer__copy">&copy; 2020 Mesto Russia</p>
@@ -35,7 +34,7 @@
         <input type="text" class="popup__form-input popup__form-input_type_description-on" name="profile-description" placeholder="Чем Вы занимаетесь?" required>
         <button type="submit" class="popup__form-save-btn button">Сохранить</button>
       </form>
-      <button type="button" class="popup__close-btn button button_editing"></button>
+      <button type="button" class="popup__close-btn button button_type_close-editing"></button>
     </div>
   </div>
   <div class="popup popup__add-place">
@@ -46,21 +45,21 @@
         <input type="url" class="popup__form-input popup__form-input_type_link-on" name="place-link" placeholder="Ссылка на картинку" required>
         <button type="submit" class="popup__form-save-btn button">Создать</button>
       </form>
-      <button type="button" class="popup__close-btn button button_creating"></button>
+      <button type="button" class="popup__close-btn button button_type_close-creating"></button>
     </div>
   </div>
   <div class="popup popup__image-place">
-    <figure class="popup__image-container">
-      <img src="" alt="" class="popup__image">
-      <figcaption class="popup__image-caption"></figcaption>
-      <button type="button" class="popup__close-btn button button_viewing"></button>
-    </figure>
+    <div class="popup__image-container">
+      <img class="popup__image" src="#" alt="#">
+      <p class="popup__image-caption"></p>
+      <button type="button" class="popup__close-btn button button_type_close-viewing"></button>
+    </div>
   </div>
 
   <template id="place-template">
     <article class="place">
       <button type="button" class="place__trash-btn button"></button>
-      <img class="place__image" src="" alt="">
+      <img class="place__image" src="#" alt="#">
       <h2 class="place__title"></h2>
       <button type="button" class="place__like-btn button"></button>
     </article>
