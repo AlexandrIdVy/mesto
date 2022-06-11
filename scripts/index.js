@@ -50,35 +50,33 @@ const initialCards = [
   }
 ];
 
-// открытие-закрытие popup
-function openClosePopup(popup) {
-  popup.classList.toggle('popup_opened');
+// открытие popup
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
+// закрытие popup
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
 // открытие popup-edit-profile
 function getPopupEditProfile() {
-  if (!popupEditProfile.classList.contains('popup_opened')) {
-    nameEdit.value = nameProfile.textContent;
-    descriptionEdit.value = descriptionProfile.textContent;
-  }
-  else {
-    nameEdit.value = '';
-    descriptionEdit.value = '';
-  }
-  openClosePopup(popupEditProfile);
+  nameEdit.value = nameProfile.textContent;
+  descriptionEdit.value = descriptionProfile.textContent;
+  openPopup(popupEditProfile);
 }
 
 // открытие popup-add-place
 function getPopupAddPlace() {
-  namePlace.value = '';
-  linkForPlace.value = '';
-  openClosePopup(popupAddPlace);
+  formAddPlace.reset();
+  openPopup(popupAddPlace);
 }
 
 // проверка области клика при закрытии popup
 const checkCloseClickPopup = (evt, popup) => {
     if (evt.target === evt.currentTarget) {
-      openClosePopup(popup);
+      closePopup(popup);
     }
 }
 
@@ -87,14 +85,14 @@ function editProfileHandler(evt) {
   evt.preventDefault();
   nameProfile.textContent = nameEdit.value;
   descriptionProfile.textContent = descriptionEdit.value;
-  getPopupEditProfile();
+  closePopup(popupEditProfile);
 }
 
-// добавление карточки
+// добавление карточки в places
 function addPlaceHandler(evt) {
   evt.preventDefault();
-  addPlace(namePlace.value, linkForPlace.value);
-  getPopupAddPlace();
+  renderCard(places, createCard(namePlace.value, linkForPlace.value));
+  closePopup(popupAddPlace);
 }
 
 // просмотр изображения карточки
@@ -102,11 +100,11 @@ function openImage(linkImage, namePlace) {
   imagePlace.src = linkImage;
   imagePlace.alt = namePlace;
   imagePlaceCaption.textContent = namePlace;
-  openClosePopup(popupImagePlace);
+  openPopup(popupImagePlace);
 }
 
-// добавление шаблона place
-function addPlace(namePlace, linkImage) {
+// создание карточки
+function createCard(namePlace, linkImage) {
   const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.place').cloneNode(true);
 
@@ -123,16 +121,21 @@ function addPlace(namePlace, linkImage) {
     placeElement.querySelector('.place__trash-btn').closest('.place').remove();
   });
 
-  places.prepend(placeElement);
+  return placeElement;
 }
 
-initialCards.forEach(element => addPlace(element.name, element.link));
+// добавление карточки в контейнер
+function renderCard(container, cardElement) {
+  container.prepend(cardElement);
+}
+
+initialCards.forEach(element => renderCard(places, createCard(element.name, element.link)));
 
 btnEditProfile.addEventListener('click', () => getPopupEditProfile());
 btnAddPlace.addEventListener('click', () => getPopupAddPlace());
-btnCloseEditProfile.addEventListener('click', () => openClosePopup(popupEditProfile));
-btnCloseAddPlace.addEventListener('click', () => openClosePopup(popupAddPlace));
-btnCloseImagePlace.addEventListener('click', () => openClosePopup(popupImagePlace));
+btnCloseEditProfile.addEventListener('click', () => closePopup(popupEditProfile));
+btnCloseAddPlace.addEventListener('click', () => closePopup(popupAddPlace));
+btnCloseImagePlace.addEventListener('click', () => closePopup(popupImagePlace));
 
 popupEditProfile.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupEditProfile));
 popupAddPlace.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupAddPlace));
