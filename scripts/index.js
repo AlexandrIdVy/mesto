@@ -67,12 +67,10 @@ function getPopupAddPlace() {
 }
 
 // проверка области клика при закрытии popup
-function checkCloseClickPopup(popup) {
-  return function (evt) {
+const checkCloseClickPopup = (evt, popup) => {
     if (evt.target === evt.currentTarget) {
       openClosePopup(popup);
     }
-  }
 }
 
 // замена имени и описания в профиле
@@ -98,13 +96,13 @@ function addPlace(namePlace, linkImage) {
   places.append(placeElement);
 }
 
-initialCards.forEach(element => { addPlace(element.name, element.link); });
+initialCards.forEach(element => addPlace(element.name, element.link));
 
-editProfileButton.addEventListener('click', () => { getPopupEditProfile(); });
-placeAddButton.addEventListener('click', () => { getPopupAddPlace(); });
-btnCloseEditProfile.addEventListener('click', () => { openClosePopup(popupEditProfile); });
-btnCloseAddPlace.addEventListener('click', () => { openClosePopup(popupAddPlace); });
-popupEditProfile.addEventListener('click', () => { checkCloseClickPopup(popupEditProfile); } );
-popupEditProfile.addEventListener('click', () => { checkCloseClickPopup(popupAddPlace); } );
+editProfileButton.addEventListener('click', () => getPopupEditProfile());
+placeAddButton.addEventListener('click', () => getPopupAddPlace());
+btnCloseEditProfile.addEventListener('click', () => openClosePopup(popupEditProfile));
+btnCloseAddPlace.addEventListener('click', () => openClosePopup(popupAddPlace));
+popupEditProfile.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupEditProfile));
+popupAddPlace.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupAddPlace));
 formEdit.addEventListener('submit', formSubmitHandler);
 
