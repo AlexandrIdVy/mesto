@@ -9,12 +9,12 @@ const btnCloseEditProfile = document.querySelector('.button_type_close-editing')
 const btnCloseAddPlace = document.querySelector('.button_type_close-creating');
 const btnCloseImagePlace = document.querySelector('.button_type_close-viewing');
 
-const popupEditProfile = document.querySelector('.popup__edit-profile');
-const popupAddPlace = document.querySelector('.popup__add-place');
-const popupImagePlace = document.querySelector('.popup__image-place');
+const popupEditProfile = document.querySelector('.popup_type_edit-profile');
+const popupAddPlace = document.querySelector('.popup_type_add-place');
+const popupImagePlace = document.querySelector('.popup_type_image-place');
 
-const formEditProfile = document.querySelector('.popup__form-edit-profile');
-const formAddPlace = document.querySelector('.popup__form-add-place');
+const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
+const formAddPlace = document.querySelector('.popup__form_type_add-place');
 
 const nameEdit = document.querySelector('.popup__form-input_type_name-on');
 const descriptionEdit = document.querySelector('.popup__form-input_type_description-on');
