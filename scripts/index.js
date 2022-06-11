@@ -102,6 +102,9 @@ function addPlace(namePlace, linkImage) {
   placeElement.querySelector('.place__like-btn').addEventListener('click', evt => {
     evt.target.classList.toggle('place__like-btn_active');
   });
+  placeElement.querySelector('.place__trash-btn').addEventListener('click', () => {
+    placeElement.querySelector('.place__trash-btn').closest('.place').remove();
+  });
 
   places.prepend(placeElement);
 }
