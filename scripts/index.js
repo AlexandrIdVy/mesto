@@ -1,19 +1,20 @@
-const editProfileButton = document.querySelector('.profile__info-edit-btn');
-const placeAddButton = document.querySelector('.profile__add-btn');
+const nameProfile = document.querySelector('.profile__info-title');
+const descriptionProfile = document.querySelector('.profile__info-subtitle');
 
 const places = document.querySelector('.places');
+
+const btnEditProfile = document.querySelector('.profile__info-edit-btn');
+const btnAddPlace = document.querySelector('.profile__add-btn');
+const btnCloseEditProfile = document.querySelector('.button_editing');
+const btnCloseAddPlace = document.querySelector('.button_creating');
+const btnCloseImagePlace = document.querySelector('.button_viewing');
 
 const popupEditProfile = document.querySelector('.popup__edit-profile');
 const popupAddPlace = document.querySelector('.popup__add-place');
 const popupImagePlace = document.querySelector('.popup__image-place');
-const btnCloseEditProfile = document.querySelector('.button_editing');
-const btnCloseAddPlace = document.querySelector('.button_creating');
 
 const formEditProfile = document.querySelector('.popup__form-edit-profile');
 const formAddPlace = document.querySelector('.popup__form-add-place');
-
-const nameProfile = document.querySelector('.profile__info-title');
-const descriptionProfile = document.querySelector('.profile__info-subtitle');
 
 const nameEdit = document.querySelector('.popup__form-input_type_name-on');
 const descriptionEdit = document.querySelector('.popup__form-input_type_description-on');
@@ -54,6 +55,7 @@ function openClosePopup(popup) {
   popup.classList.toggle('popup_opened');
 }
 
+// открытие popup-edit-profile
 function getPopupEditProfile() {
   if (!popupEditProfile.classList.contains('popup_opened')) {
     nameEdit.value = nameProfile.textContent;
@@ -66,6 +68,7 @@ function getPopupEditProfile() {
   openClosePopup(popupEditProfile);
 }
 
+// открытие popup-add-place
 function getPopupAddPlace() {
   namePlace.value = '';
   linkForPlace.value = '';
@@ -94,6 +97,14 @@ function addPlaceHandler(evt) {
   getPopupAddPlace();
 }
 
+// просмотр изображения карточки
+function openImage(linkImage, namePlace) {
+  imagePlace.src = linkImage;
+  imagePlace.alt = namePlace;
+  imagePlaceCaption.textContent = namePlace;
+  openClosePopup(popupImagePlace);
+}
+
 // добавление шаблона place
 function addPlace(namePlace, linkImage) {
   const placeTemplate = document.querySelector('#place-template').content;
@@ -102,11 +113,8 @@ function addPlace(namePlace, linkImage) {
   placeElement.querySelector('.place__image').src = linkImage;
   placeElement.querySelector('.place__image').alt = 'Фото ' + namePlace;
   placeElement.querySelector('.place__title').textContent = namePlace;
-  placeElement.querySelector('.place__image').addEventListener('click', (evt) => {
-    imagePlace.src = linkImage;
-    imagePlace.alt = namePlace;
-    imagePlaceCaption.textContent = namePlace;
-    openClosePopup(popupImagePlace);
+  placeElement.querySelector('.place__image').addEventListener('click', () => {
+    openImage(linkImage, namePlace);
   });
   placeElement.querySelector('.place__like-btn').addEventListener('click', (evt) => {
     evt.target.classList.toggle('place__like-btn_active');
@@ -120,12 +128,16 @@ function addPlace(namePlace, linkImage) {
 
 initialCards.forEach(element => addPlace(element.name, element.link));
 
-editProfileButton.addEventListener('click', () => getPopupEditProfile());
-placeAddButton.addEventListener('click', () => getPopupAddPlace());
+btnEditProfile.addEventListener('click', () => getPopupEditProfile());
+btnAddPlace.addEventListener('click', () => getPopupAddPlace());
 btnCloseEditProfile.addEventListener('click', () => openClosePopup(popupEditProfile));
 btnCloseAddPlace.addEventListener('click', () => openClosePopup(popupAddPlace));
+btnCloseImagePlace.addEventListener('click', () => openClosePopup(popupImagePlace));
+
 popupEditProfile.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupEditProfile));
 popupAddPlace.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupAddPlace));
+popupImagePlace.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupImagePlace));
+
 formEditProfile.addEventListener('submit', editProfileHandler);
 formAddPlace.addEventListener('submit', addPlaceHandler);
 
