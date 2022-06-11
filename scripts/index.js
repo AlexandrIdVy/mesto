@@ -8,13 +8,16 @@ const popupAddPlace = document.querySelector('.popup__add-place');
 const btnCloseEditProfile = document.querySelector('.button_editing');
 const btnCloseAddPlace = document.querySelector('.button_creating');
 
-const formEdit = document.querySelector('.popup__form');
+const formEditProfile = document.querySelector('.popup__form-edit-profile');
+const formAddPlace = document.querySelector('.popup__form-add-place');
 
 const nameProfile = document.querySelector('.profile__info-title');
 const descriptionProfile = document.querySelector('.profile__info-subtitle');
 
 const nameEdit = document.querySelector('.popup__form-input_type_name-on');
 const descriptionEdit = document.querySelector('.popup__form-input_type_description-on');
+const namePlace = document.querySelector('.popup__form-input_type_place-on');
+const linkForPlace = document.querySelector('.popup__form-input_type_link-on');
 
 const initialCards = [
   {
@@ -49,7 +52,6 @@ function openClosePopup(popup) {
 }
 
 function getPopupEditProfile() {
-
   if (!popupEditProfile.classList.contains('popup_opened')) {
     nameEdit.value = nameProfile.textContent;
     descriptionEdit.value = descriptionProfile.textContent;
@@ -58,11 +60,12 @@ function getPopupEditProfile() {
     nameEdit.value = '';
     descriptionEdit.value = '';
   }
-
   openClosePopup(popupEditProfile);
 }
 
 function getPopupAddPlace() {
+  namePlace.value = '';
+  linkForPlace.value = '';
   openClosePopup(popupAddPlace);
 }
 
@@ -74,11 +77,18 @@ const checkCloseClickPopup = (evt, popup) => {
 }
 
 // замена имени и описания в профиле
-function formSubmitHandler(evt) {
+function editProfileHandler(evt) {
   evt.preventDefault();
   nameProfile.textContent = nameEdit.value;
   descriptionProfile.textContent = descriptionEdit.value;
-  openClosePopup(popupEditProfile);
+  getPopupEditProfile();
+}
+
+// добавление карточки
+function addPlaceHandler(evt) {
+  evt.preventDefault();
+  addPlace(namePlace.value, linkForPlace.value);
+  getPopupAddPlace();
 }
 
 // добавление шаблона place
@@ -93,7 +103,7 @@ function addPlace(namePlace, linkImage) {
     evt.target.classList.toggle('place__like-btn_active');
   });
 
-  places.append(placeElement);
+  places.prepend(placeElement);
 }
 
 initialCards.forEach(element => addPlace(element.name, element.link));
@@ -104,5 +114,6 @@ btnCloseEditProfile.addEventListener('click', () => openClosePopup(popupEditProf
 btnCloseAddPlace.addEventListener('click', () => openClosePopup(popupAddPlace));
 popupEditProfile.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupEditProfile));
 popupAddPlace.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupAddPlace));
-formEdit.addEventListener('submit', formSubmitHandler);
+formEditProfile.addEventListener('submit', editProfileHandler);
+formAddPlace.addEventListener('submit', addPlaceHandler);
 
