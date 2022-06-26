@@ -26,12 +26,15 @@ const imagePlaceCaption = document.querySelector('.popup__image-caption');
 // открытие popup
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  checkClosePopup(popup);
+  document.addEventListener('keydown', checkCloseKeyPopup);
+  popup.addEventListener('click', checkCloseClickPopup);
 }
 
 // закрытие popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', checkCloseKeyPopup);
+  popup.removeEventListener('click', checkCloseClickPopup);
 }
 
 // открытие popup-edit-profile
@@ -47,18 +50,21 @@ function getPopupAddPlace() {
   openPopup(popupAddPlace);
 }
 
-// проверка закрытия popup
-function checkClosePopup (popup) {
-  window.addEventListener('keydown', getKey);
-  popup.addEventListener('click', getKey);
-  function getKey(evt) {
-    if (evt.key === 'Escape' || evt.target === evt.currentTarget) {
-      console.log(evt);
-      window.removeEventListener('keydown', getKey);
-      popup.removeEventListener('click', getKey);
+// проверка области клика при закрытии popup
+function checkCloseClickPopup(evt) {
+    if (evt.target === evt.currentTarget) {
+      const popup = document.querySelector('.popup_opened');
       closePopup(popup);
     }
-  }
+}
+
+// проверка клавиши при закрытии popup
+function checkCloseKeyPopup(evt) {
+    if (evt.key === 'Escape') {
+      const popup = document.querySelector('.popup_opened');
+      closePopup(popup);
+      console.log(evt)
+    }
 }
 
 // замена имени и описания в профиле
