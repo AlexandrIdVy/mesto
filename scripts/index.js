@@ -63,9 +63,16 @@ function checkCloseKeyPopup(evt) {
     if (evt.key === 'Escape') {
       const popup = document.querySelector('.popup_opened');
       closePopup(popup);
-      console.log(evt)
     }
 }
+
+// проверка кнопки закрытия popup
+// function checkCloseBtnPopup(evt) {
+//   if (evt.target === evt.currentTarget) {
+//     const popup = document.querySelector('.popup_opened');
+//     closePopup(popup);
+//   }
+// }
 
 // замена имени и описания в профиле
 function editProfileHandler(evt) {

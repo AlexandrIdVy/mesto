@@ -30,8 +30,28 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form name="formEditProfile" class="popup__form popup__form_type_edit-profile">
-        <input type="text" class="popup__form-input popup__form-input_type_name-on" name="profileName" placeholder="Ваше имя?" required>
-        <input type="text" class="popup__form-input popup__form-input_type_description-on" name="profileDescription" placeholder="Чем Вы занимаетесь?" required>
+        <fieldset class="popup__set">
+          <label class="popup__field">
+            <input type="text"
+            class="popup__form-input popup__form-input_type_name-on"
+            placeholder="Ваше имя?"
+            name="profileName"
+            required
+            minlength="2"
+            maxlength="40">
+            <span class="popup__form-input-error"></span>
+          </label>
+          <label class="popup__field">
+            <input type="text"
+            class="popup__form-input popup__form-input_type_description-on"
+            placeholder="Чем Вы занимаетесь?"
+            name="profileDescription"
+            required
+            minlength="2"
+            maxlength="200">
+            <span class="popup__form-input-error"></span>
+          </label>
+        </fieldset>
         <button type="submit" class="popup__form-save-btn button">Сохранить</button>
       </form>
       <button type="button" class="popup__close-btn button button_type_close-editing"></button>
@@ -41,8 +61,26 @@
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
       <form name="formAddPlace" class="popup__form popup__form_type_add-place">
-        <input type="text" class="popup__form-input popup__form-input_type_place-on" name="placeName" placeholder="Название" required>
-        <input type="url" class="popup__form-input popup__form-input_type_link-on" name="placeLink" placeholder="Ссылка на картинку" required>
+        <fieldset class="popup__set">
+          <label class="popup__field">
+            <input type="text"
+            class="popup__form-input popup__form-input_type_place-on"
+            placeholder="Название"
+            name="placeName"
+            required
+            minlength="2"
+            maxlength="30">
+            <span class="popup__form-input-error"></span>
+          </label>
+          <label class="popup__field">
+            <input type="url"
+            class="popup__form-input popup__form-input_type_link-on"
+            name="placeLink"
+            placeholder="Ссылка на картинку"
+            required>
+            <span class="popup__form-input-error"></span>
+          </label>
+        </fieldset>
         <button type="submit" class="popup__form-save-btn button">Создать</button>
       </form>
       <button type="button" class="popup__close-btn button button_type_close-creating"></button>
