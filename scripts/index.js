@@ -10,49 +10,23 @@ const btnCloseAddPlace = document.querySelector('.button_type_close-creating');
 const btnCloseImagePlace = document.querySelector('.button_type_close-viewing');
 
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
+const formEditProfile = document.forms.formEditProfile;
+const nameEdit = formEditProfile.elements.profileName;
+const descriptionEdit = formEditProfile.elements.profileDescription;
+
 const popupAddPlace = document.querySelector('.popup_type_add-place');
+const formAddPlace = document.forms.formAddPlace;
+const namePlace = formAddPlace.elements.placeName;
+const linkForPlace = formAddPlace.elements.placeLink;
+
 const popupImagePlace = document.querySelector('.popup_type_image-place');
-
-const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
-const formAddPlace = document.querySelector('.popup__form_type_add-place');
-
-const nameEdit = document.querySelector('.popup__form-input_type_name-on');
-const descriptionEdit = document.querySelector('.popup__form-input_type_description-on');
-const namePlace = document.querySelector('.popup__form-input_type_place-on');
-const linkForPlace = document.querySelector('.popup__form-input_type_link-on');
 const imagePlace = document.querySelector('.popup__image');
 const imagePlaceCaption = document.querySelector('.popup__image-caption');
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 // открытие popup
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  checkClosePopup(popup);
 }
 
 // закрытие popup
@@ -73,11 +47,18 @@ function getPopupAddPlace() {
   openPopup(popupAddPlace);
 }
 
-// проверка области клика при закрытии popup
-const checkCloseClickPopup = (evt, popup) => {
-    if (evt.target === evt.currentTarget) {
+// проверка закрытия popup
+function checkClosePopup (popup) {
+  window.addEventListener('keydown', getKey);
+  popup.addEventListener('click', getKey);
+  function getKey(evt) {
+    if (evt.key === 'Escape' || evt.target === evt.currentTarget) {
+      console.log(evt);
+      window.removeEventListener('keydown', getKey);
+      popup.removeEventListener('click', getKey);
       closePopup(popup);
     }
+  }
 }
 
 // замена имени и описания в профиле
@@ -131,16 +112,11 @@ function renderCard(container, cardElement) {
 
 initialCards.forEach(element => renderCard(places, createCard(element.name, element.link)));
 
-btnEditProfile.addEventListener('click', () => getPopupEditProfile());
-btnAddPlace.addEventListener('click', () => getPopupAddPlace());
+btnEditProfile.addEventListener('click', getPopupEditProfile);
+btnAddPlace.addEventListener('click', getPopupAddPlace);
 btnCloseEditProfile.addEventListener('click', () => closePopup(popupEditProfile));
 btnCloseAddPlace.addEventListener('click', () => closePopup(popupAddPlace));
 btnCloseImagePlace.addEventListener('click', () => closePopup(popupImagePlace));
 
-popupEditProfile.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupEditProfile));
-popupAddPlace.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupAddPlace));
-popupImagePlace.addEventListener('click', (evt) => checkCloseClickPopup(evt, popupImagePlace));
-
 formEditProfile.addEventListener('submit', editProfileHandler);
 formAddPlace.addEventListener('submit', addPlaceHandler);
-

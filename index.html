@@ -29,9 +29,9 @@
   <div class="popup popup_type_edit-profile">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="popup-form-edit-profile" class="popup__form popup__form_type_edit-profile">
-        <input type="text" class="popup__form-input popup__form-input_type_name-on" name="profile-name" placeholder="Ваше имя?" required>
-        <input type="text" class="popup__form-input popup__form-input_type_description-on" name="profile-description" placeholder="Чем Вы занимаетесь?" required>
+      <form name="formEditProfile" class="popup__form popup__form_type_edit-profile">
+        <input type="text" class="popup__form-input popup__form-input_type_name-on" name="profileName" placeholder="Ваше имя?" required>
+        <input type="text" class="popup__form-input popup__form-input_type_description-on" name="profileDescription" placeholder="Чем Вы занимаетесь?" required>
         <button type="submit" class="popup__form-save-btn button">Сохранить</button>
       </form>
       <button type="button" class="popup__close-btn button button_type_close-editing"></button>
@@ -40,20 +40,20 @@
   <div class="popup popup_type_add-place">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
-      <form name="popup-form-add-place" class="popup__form popup__form_type_add-place">
-        <input type="text" class="popup__form-input popup__form-input_type_place-on" name="place-name" placeholder="Название" required>
-        <input type="url" class="popup__form-input popup__form-input_type_link-on" name="place-link" placeholder="Ссылка на картинку" required>
+      <form name="formAddPlace" class="popup__form popup__form_type_add-place">
+        <input type="text" class="popup__form-input popup__form-input_type_place-on" name="placeName" placeholder="Название" required>
+        <input type="url" class="popup__form-input popup__form-input_type_link-on" name="placeLink" placeholder="Ссылка на картинку" required>
         <button type="submit" class="popup__form-save-btn button">Создать</button>
       </form>
       <button type="button" class="popup__close-btn button button_type_close-creating"></button>
     </div>
   </div>
   <div class="popup popup_type_image-place">
-    <div class="popup__image-container">
-      <img class="popup__image" src="#" alt="#">
-      <p class="popup__image-caption"></p>
+    <figure class="popup__image-container">
       <button type="button" class="popup__close-btn button button_type_close-viewing"></button>
-    </div>
+      <img class="popup__image" src="#" alt="#">
+      <figcaption class="popup__image-caption"></figcaption>
+    </figure>
   </div>
 
   <template id="place-template">
@@ -64,7 +64,8 @@
       <button type="button" class="place__like-btn button"></button>
     </article>
   </template>
-
+  <script src="./scripts/initialCards.js"></script>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
