@@ -25,6 +25,7 @@ const imagePlaceCaption = document.querySelector('.popup__image-caption');
 
 // открытие popup
 function openPopup(popup) {
+  enableValidation();
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', checkCloseKeyPopup);
   popup.addEventListener('click', checkCloseClickPopup);
@@ -52,18 +53,18 @@ function getPopupAddPlace() {
 
 // проверка области клика при закрытии popup
 function checkCloseClickPopup(evt) {
-    if (evt.target === evt.currentTarget) {
-      const popup = document.querySelector('.popup_opened');
-      closePopup(popup);
-    }
+  if (evt.target === evt.currentTarget) {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
 }
 
 // проверка клавиши при закрытии popup
 function checkCloseKeyPopup(evt) {
-    if (evt.key === 'Escape') {
-      const popup = document.querySelector('.popup_opened');
-      closePopup(popup);
-    }
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
 }
 
 // проверка кнопки закрытия popup
