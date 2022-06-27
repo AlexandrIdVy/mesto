@@ -25,7 +25,14 @@ const imagePlaceCaption = document.querySelector('.popup__image-caption');
 
 // открытие popup
 function openPopup(popup) {
-  enableValidation();
+  enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__form-input',
+    submitButtonSelector: '.popup__form-save-btn',
+    inactiveButtonClass: 'button_type_no-active',
+    inputErrorClass: 'popup__form-input_type_error',
+    errorClass: 'popup__form-input-error_visible'
+  });
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', checkCloseKeyPopup);
   popup.addEventListener('click', checkCloseClickPopup);

@@ -1,27 +1,27 @@
 /// ВАЛИДАЦИЯ
 
 // показываем ошибку валидации инпута
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector('.popup__form-input-error');
-  inputElement.classList.add('popup__form-input_type_error');
+const showInputError = (formElement, inputElement, errorMessage, settings) => {
+  const errorElement = formElement.querySelector(`${settings.inputSelector}-error`);
+  inputElement.classList.add(settings.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__form-input-error_visible');
+  errorElement.classList.add(settings.errorClass);
 };
 
 // скрываем ошибку валидации инпута
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector('.popup__form-input-error');
-  inputElement.classList.remove('popup__form-input_type_error');
-  errorElement.classList.remove('popup__form-input-error_visible');
+const hideInputError = (formElement, inputElement, settings) => {
+  const errorElement = formElement.querySelector(`${settings.inputSelector}-error`);
+  inputElement.classList.remove(settings.inputErrorClass);
+  errorElement.classList.remove(settings.errorClass);
   errorElement.textContent = '';
 };
 
 // проверяем валидность поля
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, settings) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, settings);
   }
 };
 
@@ -31,53 +31,51 @@ const hasInvalidInput = (inputList) => {
 };
 
 // блокируем кнопку отправки формы
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, settings) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__form-save-btn_type_no-active');
+    buttonElement.classList.add(settings.inactiveButtonClass);
     buttonElement.disabled = true;
 
   }
   else {
-    buttonElement.classList.remove('popup__form-save-btn_type_no-active');
+    buttonElement.classList.remove(settings.inactiveButtonClass);
     buttonElement.disabled = false;
   }
 };
 
 // устанавливаем слушателей событий
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__form-input'));
-  const buttonElement = formElement.querySelector('.popup__form-save-btn');
-  toggleButtonState(inputList, buttonElement);
+const setEventListeners = (formElement, settings) => {
+  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+  const buttonElement = formElement.querySelector(settings.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, settings);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
+      checkInputValidity(formElement, inputElement, settings);
+      toggleButtonState(inputList, buttonElement, settings);
     });
   });
 };
 
 // включаем валидацию на полученной форме и филдсете
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+const enableValidation = (settings) => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
 
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    const fieldsetList = Array.from(formElement.querySelectorAll('.popup__set'));
-    fieldsetList.forEach(fieldset => setEventListeners(fieldset));
+    setEventListeners(formElement, settings);
   });
 
 };
 
-enableValidation();
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
-// enableValidation({
-//   formSelector: '.popup__form',
-//   inputSelector: 'popup__form-input',
-//   submitButtonSelector: '.popup__form-save-btn',
-//   inactiveButtonClass: 'button_type_no-active',
-//   inputErrorClass: 'popup__form-input_type_error',
-//   errorClass: 'popup__form-input-error_visible'
-// });
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__form-input',
+  submitButtonSelector: '.popup__form-save-btn',
+  inactiveButtonClass: 'button_type_no-active',
+  inputErrorClass: 'popup__form-input_type_error',
+  errorClass: 'popup__form-input-error_visible'
+});
