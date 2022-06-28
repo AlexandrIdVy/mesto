@@ -2,7 +2,7 @@
 
 // показываем ошибку валидации инпута
 const showInputError = (formElement, inputElement, errorMessage, settings) => {
-  const errorElement = formElement.querySelector(`${settings.inputSelector}-error`);
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(settings.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(settings.errorClass);
@@ -10,7 +10,7 @@ const showInputError = (formElement, inputElement, errorMessage, settings) => {
 
 // скрываем ошибку валидации инпута
 const hideInputError = (formElement, inputElement, settings) => {
-  const errorElement = formElement.querySelector(`${settings.inputSelector}-error`);
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(settings.inputErrorClass);
   errorElement.classList.remove(settings.errorClass);
   errorElement.textContent = '';
@@ -35,7 +35,6 @@ const toggleButtonState = (inputList, buttonElement, settings) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(settings.inactiveButtonClass);
     buttonElement.disabled = true;
-
   }
   else {
     buttonElement.classList.remove(settings.inactiveButtonClass);
@@ -68,14 +67,3 @@ const enableValidation = (settings) => {
   });
 
 };
-
-// включение валидации вызовом enableValidation
-// все настройки передаются при вызове
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__form-input',
-  submitButtonSelector: '.popup__form-save-btn',
-  inactiveButtonClass: 'button_type_no-active',
-  inputErrorClass: 'popup__form-input_type_error',
-  errorClass: 'popup__form-input-error_visible'
-});

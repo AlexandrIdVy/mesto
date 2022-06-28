@@ -29,13 +29,14 @@ function openPopup(popup) {
     formSelector: '.popup__form',
     inputSelector: '.popup__form-input',
     submitButtonSelector: '.popup__form-save-btn',
-    inactiveButtonClass: 'button_type_no-active',
+    inactiveButtonClass: 'popup__form-save-btn_type_no-active',
     inputErrorClass: 'popup__form-input_type_error',
     errorClass: 'popup__form-input-error_visible'
   });
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', checkCloseKeyPopup);
   popup.addEventListener('click', checkCloseClickPopup);
+  popup.addEventListener('click', checkCloseBtnPopup);
 }
 
 // закрытие popup
@@ -43,6 +44,21 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', checkCloseKeyPopup);
   popup.removeEventListener('click', checkCloseClickPopup);
+  popup.removeEventListener('click', checkCloseBtnPopup);
+  cleanValidation();
+}
+
+// очистка валидации при отмене
+function cleanValidation() {
+  nameEdit.classList.remove('popup__form-input_type_error');
+  descriptionEdit.classList.remove('popup__form-input_type_error');
+  namePlace.classList.remove('popup__form-input_type_error');
+  linkForPlace.classList.remove('popup__form-input_type_error');
+  const listErrors = Array.from(document.querySelectorAll('.popup__form-input-error'));
+  listErrors.forEach((element) => {
+    element.textContent = '';
+    element.classList.remove('popup__form-input-error_visible');
+  });
 }
 
 // открытие popup-edit-profile
@@ -75,12 +91,13 @@ function checkCloseKeyPopup(evt) {
 }
 
 // проверка кнопки закрытия popup
-// function checkCloseBtnPopup(evt) {
-//   if (evt.target === evt.currentTarget) {
-//     const popup = document.querySelector('.popup_opened');
-//     closePopup(popup);
-//   }
-// }
+function checkCloseBtnPopup(evt) {
+  console.log(evt);
+  if (evt.target === evt.target.closest('.popup__close-btn')) {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+}
 
 // замена имени и описания в профиле
 function editProfileHandler(evt) {
@@ -135,9 +152,6 @@ initialCards.forEach(element => renderCard(places, createCard(element.name, elem
 
 btnEditProfile.addEventListener('click', getPopupEditProfile);
 btnAddPlace.addEventListener('click', getPopupAddPlace);
-btnCloseEditProfile.addEventListener('click', () => closePopup(popupEditProfile));
-btnCloseAddPlace.addEventListener('click', () => closePopup(popupAddPlace));
-btnCloseImagePlace.addEventListener('click', () => closePopup(popupImagePlace));
 
 formEditProfile.addEventListener('submit', editProfileHandler);
 formAddPlace.addEventListener('submit', addPlaceHandler);
