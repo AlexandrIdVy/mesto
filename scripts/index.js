@@ -92,7 +92,6 @@ function checkCloseKeyPopup(evt) {
 
 // проверка кнопки закрытия popup
 function checkCloseBtnPopup(evt) {
-  console.log(evt);
   if (evt.target === evt.target.closest('.popup__close-btn')) {
     const popup = document.querySelector('.popup_opened');
     closePopup(popup);
