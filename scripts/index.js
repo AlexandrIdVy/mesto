@@ -5,19 +5,20 @@ const places = document.querySelector('.places');
 
 const btnEditProfile = document.querySelector('.profile__info-edit-btn');
 const btnAddPlace = document.querySelector('.profile__add-btn');
-const btnCloseEditProfile = document.querySelector('.button_type_close-editing');
-const btnCloseAddPlace = document.querySelector('.button_type_close-creating');
-const btnCloseImagePlace = document.querySelector('.button_type_close-viewing');
+
+const placeTemplate = document.querySelector('#place-template').content;
 
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const formEditProfile = document.forms.formEditProfile;
 const nameEdit = formEditProfile.elements.profileName;
 const descriptionEdit = formEditProfile.elements.profileDescription;
+const btnSubmitProfile = formEditProfile.querySelector('.popup__form-save-btn');
 
 const popupAddPlace = document.querySelector('.popup_type_add-place');
 const formAddPlace = document.forms.formAddPlace;
 const namePlace = formAddPlace.elements.placeName;
 const linkForPlace = formAddPlace.elements.placeLink;
+const btnSubmitPlace = formAddPlace.querySelector('.popup__form-save-btn');
 
 const popupImagePlace = document.querySelector('.popup_type_image-place');
 const imagePlace = document.querySelector('.popup__image');
@@ -25,52 +26,32 @@ const imagePlaceCaption = document.querySelector('.popup__image-caption');
 
 // открытие popup
 function openPopup(popup) {
-  enableValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__form-input',
-    submitButtonSelector: '.popup__form-save-btn',
-    inactiveButtonClass: 'popup__form-save-btn_type_no-active',
-    inputErrorClass: 'popup__form-input_type_error',
-    errorClass: 'popup__form-input-error_visible'
-  });
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', checkCloseKeyPopup);
-  popup.addEventListener('click', checkCloseClickPopup);
-  popup.addEventListener('click', checkCloseBtnPopup);
+  popup.addEventListener('mousedown', checkCloseClickPopup);
+  popup.addEventListener('mousedown', checkCloseBtnPopup);
 }
 
 // закрытие popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', checkCloseKeyPopup);
-  popup.removeEventListener('click', checkCloseClickPopup);
-  popup.removeEventListener('click', checkCloseBtnPopup);
-  cleanValidation();
-}
-
-// очистка валидации при отмене
-function cleanValidation() {
-  nameEdit.classList.remove('popup__form-input_type_error');
-  descriptionEdit.classList.remove('popup__form-input_type_error');
-  namePlace.classList.remove('popup__form-input_type_error');
-  linkForPlace.classList.remove('popup__form-input_type_error');
-  const listErrors = Array.from(document.querySelectorAll('.popup__form-input-error'));
-  listErrors.forEach((element) => {
-    element.textContent = '';
-    element.classList.remove('popup__form-input-error_visible');
-  });
+  popup.removeEventListener('mousedown', checkCloseClickPopup);
+  popup.removeEventListener('mousedown', checkCloseBtnPopup);
+  formAddPlace.reset();
+  cleanValidationError(popup);
 }
 
 // открытие popup-edit-profile
 function getPopupEditProfile() {
   nameEdit.value = nameProfile.textContent;
   descriptionEdit.value = descriptionProfile.textContent;
+  btnSubmitProfile.disabled = false;
   openPopup(popupEditProfile);
 }
 
 // открытие popup-add-place
 function getPopupAddPlace() {
-  formAddPlace.reset();
   openPopup(popupAddPlace);
 }
 
@@ -111,6 +92,8 @@ function addPlaceHandler(evt) {
   evt.preventDefault();
   renderCard(places, createCard(namePlace.value, linkForPlace.value));
   closePopup(popupAddPlace);
+  formAddPlace.reset();
+  btnSubmitPlace.disabled = true;
 }
 
 // просмотр изображения карточки
@@ -123,13 +106,14 @@ function openImage(linkImage, namePlace) {
 
 // создание карточки
 function createCard(namePlace, linkImage) {
-  const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.place').cloneNode(true);
 
-  placeElement.querySelector('.place__image').src = linkImage;
-  placeElement.querySelector('.place__image').alt = 'Фото ' + namePlace;
+  const image = placeElement.querySelector('.place__image');
+
+  image.src = linkImage;
+  image.alt = 'Фото ' + namePlace;
   placeElement.querySelector('.place__title').textContent = namePlace;
-  placeElement.querySelector('.place__image').addEventListener('click', () => {
+  image.addEventListener('click', () => {
     openImage(linkImage, namePlace);
   });
   placeElement.querySelector('.place__like-btn').addEventListener('click', (evt) => {

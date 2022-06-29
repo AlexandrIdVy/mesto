@@ -1,5 +1,14 @@
 /// ВАЛИДАЦИЯ
 
+const settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__form-input',
+  submitButtonSelector: '.popup__form-save-btn',
+  inactiveButtonClass: 'popup__form-save-btn_type_no-active',
+  inputErrorClass: 'popup__form-input_type_error',
+  errorClass: 'popup__form-input-error_visible'
+};
+
 // показываем ошибку валидации инпута
 const showInputError = (formElement, inputElement, errorMessage, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -47,7 +56,7 @@ const setEventListeners = (formElement, settings) => {
   const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
   const buttonElement = formElement.querySelector(settings.submitButtonSelector);
   toggleButtonState(inputList, buttonElement, settings);
-  inputList.forEach((inputElement) => {
+  inputList.forEach(inputElement => {
     inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement, settings);
       toggleButtonState(inputList, buttonElement, settings);
@@ -59,7 +68,7 @@ const setEventListeners = (formElement, settings) => {
 const enableValidation = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
 
-  formList.forEach((formElement) => {
+  formList.forEach(formElement => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
@@ -67,3 +76,15 @@ const enableValidation = (settings) => {
   });
 
 };
+
+// очистка валидации при отмене
+const cleanValidationError = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+  const buttonElement = formElement.querySelector(settings.submitButtonSelector);
+  inputList.forEach(inputElement => {
+    hideInputError(formElement, inputElement, settings);
+    toggleButtonState(inputList, buttonElement, settings);
+  });
+}
+
+enableValidation(settings);

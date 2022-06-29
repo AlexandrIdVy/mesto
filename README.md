@@ -40,7 +40,7 @@
 <img src="https://github.com/AlexandrIdVy/mesto/blob/main/images/demo.png">
 </div>
 
-## Project work 4 (Yandex.Praktikum - additional education courses)
+## Project work 4, 5, 6 (Yandex.Praktikum - additional education courses)
 
 A social network profile page with photos of explored places in Russia.
 
