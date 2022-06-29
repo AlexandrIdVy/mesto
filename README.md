@@ -30,6 +30,7 @@
   * Объект event
   * Обработчик событий addEventListener
   * Условные конструкции, циклы, массивы
+  * Валидация форм
 
 
 [RU](#Место) **[EN](#Mesto)**
@@ -64,3 +65,4 @@ A social network profile page with photos of explored places in Russia.
   * Object event
   * Method addEventListener
   * Conditional statements, loops, arrays
+  * Form validation
