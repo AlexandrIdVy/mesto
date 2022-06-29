@@ -38,12 +38,11 @@ function closePopup(popup) {
   document.removeEventListener('keydown', checkCloseKeyPopup);
   popup.removeEventListener('mousedown', checkCloseClickPopup);
   popup.removeEventListener('mousedown', checkCloseBtnPopup);
-  formAddPlace.reset();
-  cleanValidationError(popup);
 }
 
 // открытие popup-edit-profile
 function getPopupEditProfile() {
+  cleanValidationError(popupEditProfile);
   nameEdit.value = nameProfile.textContent;
   descriptionEdit.value = descriptionProfile.textContent;
   btnSubmitProfile.disabled = false;
@@ -52,6 +51,8 @@ function getPopupEditProfile() {
 
 // открытие popup-add-place
 function getPopupAddPlace() {
+  formAddPlace.reset();
+  cleanValidationError(popupAddPlace);
   openPopup(popupAddPlace);
 }
 
