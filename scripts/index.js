@@ -82,7 +82,6 @@ function checkCloseBtnPopup(evt) {
 
 // замена имени и описания в профиле
 function editProfileHandler(evt) {
-  evt.preventDefault();
   nameProfile.textContent = nameEdit.value;
   descriptionProfile.textContent = descriptionEdit.value;
   closePopup(popupEditProfile);
@@ -90,7 +89,6 @@ function editProfileHandler(evt) {
 
 // добавление карточки в places
 function addPlaceHandler(evt) {
-  evt.preventDefault();
   renderCard(places, createCard(namePlace.value, linkForPlace.value));
   closePopup(popupAddPlace);
   formAddPlace.reset();
