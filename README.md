@@ -6,7 +6,7 @@
 <img src="https://github.com/AlexandrIdVy/mesto/blob/main/images/demo.png">
 </div>
 
-## Проектная работа 4, 5, 6 (Яндекс.Практикум)
+## Проектная работа 4, 5, 6, 7 (Яндекс.Практикум)
 
 Страница профиля социальной сети с фотографиями исследованных мест России.
 
@@ -41,7 +41,7 @@
 <img src="https://github.com/AlexandrIdVy/mesto/blob/main/images/demo.png">
 </div>
 
-## Project work 4, 5, 6 (Yandex.Praktikum - additional education courses)
+## Project work 4, 5, 6, 7 (Yandex.Praktikum - additional education courses)
 
 A social network profile page with photos of explored places in Russia.
 
