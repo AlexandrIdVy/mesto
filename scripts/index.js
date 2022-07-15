@@ -89,48 +89,77 @@ function editProfileHandler(evt) {
 
 // добавление карточки в places
 function addPlaceHandler(evt) {
-  renderCard(places, createCard(namePlace.value, linkForPlace.value));
+  const card = {
+    name: namePlace.value,
+    link: linkForPlace.value
+  };
+  renderCard(places, card);
   closePopup(popupAddPlace);
   formAddPlace.reset();
   btnSubmitPlace.disabled = true;
 }
 
-// просмотр изображения карточки
-function openImage(linkImage, namePlace) {
-  imagePlace.src = linkImage;
-  imagePlace.alt = namePlace;
-  imagePlaceCaption.textContent = namePlace;
-  openPopup(popupImagePlace);
+/// Класс ///
+
+class Card {
+
+  constructor(cardSelector, data) {
+    this._title = data.name;
+    this._image = data.link;
+    this._cardSelector = cardSelector;
+  }
+
+  _getTemplate() {
+    const placeElement = placeTemplate.querySelector(this._cardSelector).cloneNode(true);
+
+    return placeElement;
+  }
+
+  _setEventListener() {
+    this._element.querySelector('.place__like-btn').addEventListener('click', () => this._handleLikeClick());
+    this._element.querySelector('.place__trash-btn').addEventListener('click', () => this._handleTrashClick());
+    this._element.querySelector('.place__image').addEventListener('click', () => this._handleImageClick());
+  }
+
+  _handleLikeClick() {
+    this._element.querySelector('.place__like-btn').classList.toggle('place__like-btn_active');
+  }
+
+  _handleTrashClick() {
+    this._element.querySelector('.place__trash-btn').closest(this._cardSelector).remove();
+  }
+
+  _handleImageClick() {
+    imagePlace.src = this._image;
+    imagePlace.alt = this._title;
+    imagePlaceCaption.textContent = this._title;
+    openPopup(popupImagePlace);
+  }
+
+  generateCard() {
+    this._element = this._getTemplate();
+    this._setEventListener();
+
+    this._element.querySelector('.place__title').textContent = this._title;
+    this._element.querySelector('.place__image').src = this._image;
+    this._element.querySelector('.place__image').alt = 'Фото ' + this._image;
+
+    return this._element;
+  }
+
 }
 
-// создание карточки
-function createCard(namePlace, linkImage) {
-  const placeElement = placeTemplate.querySelector('.place').cloneNode(true);
-
-  const image = placeElement.querySelector('.place__image');
-
-  image.src = linkImage;
-  image.alt = 'Фото ' + namePlace;
-  placeElement.querySelector('.place__title').textContent = namePlace;
-  image.addEventListener('click', () => {
-    openImage(linkImage, namePlace);
-  });
-  placeElement.querySelector('.place__like-btn').addEventListener('click', (evt) => {
-    evt.target.classList.toggle('place__like-btn_active');
-  });
-  placeElement.querySelector('.place__trash-btn').addEventListener('click', () => {
-    placeElement.querySelector('.place__trash-btn').closest('.place').remove();
-  });
-
-  return placeElement;
-}
+/// Класс ///
 
 // добавление карточки в контейнер
 function renderCard(container, cardElement) {
-  container.prepend(cardElement);
+  const card = new Card('.place', cardElement);
+  const cardPlace = card.generateCard();
+
+  container.prepend(cardPlace);
 }
 
-initialCards.forEach(element => renderCard(places, createCard(element.name, element.link)));
+initialCards.forEach(element => renderCard(places, element));
 
 btnEditProfile.addEventListener('click', getPopupEditProfile);
 btnAddPlace.addEventListener('click', getPopupAddPlace);
