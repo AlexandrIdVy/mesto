@@ -2,17 +2,14 @@ import { openPopup } from './index.js';
 
 const placeTemplate = document.querySelector('#place-template').content;
 
-const popupImagePlace = document.querySelector('.popup_type_image-place');
-const imagePlace = document.querySelector('.popup__image');
-const imagePlaceCaption = document.querySelector('.popup__image-caption');
-
 //класс для добавления карточек на страницу
 export default class Card {
 
-  constructor(cardSelector, data) {
+  constructor(cardSelector, data, fullImage) {
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
+    this._fullImage = fullImage;
   }
   // получаем шаблон карточки
   _getTemplate() {
@@ -26,7 +23,7 @@ export default class Card {
     this._cardImage = this._element.querySelector('.place__image');
     this._likeBtn.addEventListener('click', () => this._handleLikeClick());
     this._element.querySelector('.place__trash-btn').addEventListener('click', () => this._handleTrashClick());
-    this._cardImage.addEventListener('click', () => this._handleImageClick());
+    this._cardImage.addEventListener('click', () => this._fullImage(this._title, this._image));
   }
   // меняем состояние лайка
   _handleLikeClick() {
@@ -36,13 +33,6 @@ export default class Card {
   _handleTrashClick() {
     this._element.remove();
     this._element = null;
-  }
-  // открываем карточку
-  _handleImageClick() {
-    imagePlace.src = this._image;
-    imagePlace.alt = this._title;
-    imagePlaceCaption.textContent = this._title;
-    openPopup(popupImagePlace);
   }
   // создаем карточку
   generateCard() {
