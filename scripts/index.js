@@ -1,4 +1,5 @@
-import Card from './card.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const nameProfile = document.querySelector('.profile__info-title');
 const descriptionProfile = document.querySelector('.profile__info-subtitle');
@@ -20,6 +21,15 @@ const namePlace = formAddPlace.elements.placeName;
 const linkForPlace = formAddPlace.elements.placeLink;
 const btnSubmitPlace = formAddPlace.querySelector('.popup__form-save-btn');
 
+const settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__form-input',
+  submitButtonSelector: '.popup__form-save-btn',
+  inactiveButtonClass: 'popup__form-save-btn_type_no-active',
+  inputErrorClass: 'popup__form-input_type_error',
+  errorClass: 'popup__form-input-error_visible'
+};
+
 // открытие popup
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -38,7 +48,8 @@ function closePopup(popup) {
 
 // открытие popup-edit-profile
 function getPopupEditProfile() {
-  cleanValidationError(popupEditProfile);
+  const check = new FormValidator(settings, popupEditProfile);
+  check.cleanValidationError();
   nameEdit.value = nameProfile.textContent;
   descriptionEdit.value = descriptionProfile.textContent;
   btnSubmitProfile.disabled = false;
@@ -48,7 +59,8 @@ function getPopupEditProfile() {
 // открытие popup-add-place
 function getPopupAddPlace() {
   formAddPlace.reset();
-  cleanValidationError(popupAddPlace);
+  const check = new FormValidator(settings, popupAddPlace);
+  check.cleanValidationError();
   openPopup(popupAddPlace);
 }
 
@@ -103,6 +115,20 @@ function renderCard(container, cardElement) {
   container.prepend(cardPlace);
 }
 
+// включение валидации
+function enableValidation(settings) {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+
+  formList.forEach(formElement => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    const check = new FormValidator(settings, formElement);
+    check.enableValidation();
+  });
+
+};
+
 initialCards.forEach(element => renderCard(places, element));
 
 btnEditProfile.addEventListener('click', getPopupEditProfile);
@@ -111,4 +137,6 @@ btnAddPlace.addEventListener('click', getPopupAddPlace);
 formEditProfile.addEventListener('submit', editProfileHandler);
 formAddPlace.addEventListener('submit', addPlaceHandler);
 
-export { openPopup };
+enableValidation(settings);
+
+export { openPopup, settings };
