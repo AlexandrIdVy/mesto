@@ -30,6 +30,33 @@ const settings = {
   errorClass: 'popup__form-input-error_visible'
 };
 
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
 // открытие popup
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -48,11 +75,10 @@ function closePopup(popup) {
 
 // открытие popup-edit-profile
 function getPopupEditProfile() {
-  const check = new FormValidator(settings, popupEditProfile);
-  check.cleanValidationError();
   nameEdit.value = nameProfile.textContent;
   descriptionEdit.value = descriptionProfile.textContent;
-  btnSubmitProfile.disabled = false;
+  const check = new FormValidator(settings, popupEditProfile);
+  check.cleanValidationError();
   openPopup(popupEditProfile);
 }
 
@@ -67,7 +93,7 @@ function getPopupAddPlace() {
 // проверка области клика при закрытии popup
 function checkCloseClickPopup(evt) {
   if (evt.target === evt.currentTarget) {
-    const popup = document.querySelector('.popup_opened');
+    const popup = evt.currentTarget;
     closePopup(popup);
   }
 }
@@ -83,7 +109,7 @@ function checkCloseKeyPopup(evt) {
 // проверка кнопки закрытия popup
 function checkCloseBtnPopup(evt) {
   if (evt.target === evt.target.closest('.popup__close-btn')) {
-    const popup = document.querySelector('.popup_opened');
+    const popup = evt.currentTarget;
     closePopup(popup);
   }
 }
@@ -103,16 +129,19 @@ function addPlaceHandler(evt) {
   };
   renderCard(places, card);
   closePopup(popupAddPlace);
-  formAddPlace.reset();
   btnSubmitPlace.disabled = true;
 }
 
 // добавление карточки в контейнер
 function renderCard(container, cardElement) {
+  container.prepend(createCard(cardElement));
+}
+
+// создаем карточку
+function createCard(cardElement) {
   const card = new Card('.place', cardElement);
   const cardPlace = card.generateCard();
-
-  container.prepend(cardPlace);
+  return cardPlace;
 }
 
 // включение валидации
