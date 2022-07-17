@@ -1,4 +1,4 @@
-import Card from './Card.js';
+import Card from './card.js';
 import FormValidator from './FormValidator.js';
 
 const nameProfile = document.querySelector('.profile__info-title');
