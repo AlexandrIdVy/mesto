@@ -169,5 +169,3 @@ formAddPlace.addEventListener('submit', addPlaceHandler);
 
 checkEditProfile.enableValidation();
 checkAddPlace.enableValidation();
-
-export { openPopup, settings };

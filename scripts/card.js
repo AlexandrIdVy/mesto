@@ -1,5 +1,3 @@
-import { openPopup } from './index.js';
-
 const placeTemplate = document.querySelector('#place-template').content;
 
 //класс для добавления карточек на страницу
