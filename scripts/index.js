@@ -1,4 +1,4 @@
-import Card from './card.js';
+import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
 const nameProfile = document.querySelector('.profile__info-title');
@@ -152,9 +152,9 @@ function renderCard(container, cardElement) {
   container.prepend(createCard(cardElement));
 }
 
-// создаем карточку
+// создание карточки
 function createCard(cardElement) {
-  const card = new Card('.place', cardElement, getPopupImage);
+  const card = new Card('#place-template', cardElement, getPopupImage);
   const cardPlace = card.generateCard();
   return cardPlace;
 }

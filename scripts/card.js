@@ -1,5 +1,3 @@
-const placeTemplate = document.querySelector('#place-template').content;
-
 //класс для добавления карточек на страницу
 export default class Card {
 
@@ -11,7 +9,7 @@ export default class Card {
   }
   // получаем шаблон карточки
   _getTemplate() {
-    const placeElement = placeTemplate.querySelector(this._cardSelector).cloneNode(true);
+    const placeElement = document.querySelector(this._cardSelector).content;
 
     return placeElement;
   }
@@ -25,7 +23,7 @@ export default class Card {
   }
   // меняем состояние лайка
   _handleLikeClick() {
-    this._element.querySelector('.place__like-btn').classList.toggle('place__like-btn_active');
+    this._likeBtn.classList.toggle('place__like-btn_active');
   }
   // удаляем карточку
   _handleTrashClick() {
@@ -34,7 +32,7 @@ export default class Card {
   }
   // создаем карточку
   generateCard() {
-    this._element = this._getTemplate();
+    this._element = this._getTemplate().querySelector('.place').cloneNode(true);
     this._setEventListener();
 
     this._element.querySelector('.place__title').textContent = this._title;
