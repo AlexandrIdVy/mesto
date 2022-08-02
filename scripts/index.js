@@ -30,8 +30,7 @@ const placesList = new Section({
     placesList.addItem(cardPlace);
   },
 },
-places
-);
+places);
 
 const checkEditProfile = new FormValidator(settings, popupEditProfile);
 const checkAddPlace = new FormValidator(settings, popupAddPlace);
@@ -116,20 +115,22 @@ function addPlaceHandler(evt) {
     name: namePlace.value,
     link: linkForPlace.value
   };
-  renderCard(places, card);
+  //renderCard(places, card);
+  placesList.addItem(createCard(card));
   closePopup(popupAddPlace);
   btnSubmitPlace.disabled = true;
 }
 
 // добавление карточки в контейнер
-function renderCard(container, cardElement) {
+/* function renderCard(container, cardElement) {
   container.prepend(createCard(cardElement));
-}
+} */
 
 // создание карточки
 function createCard(cardElement) {
   const card = new Card('#place-template', cardElement, getPopupImage);
   const cardPlace = card.generateCard();
+
   return cardPlace;
 }
 
