@@ -28,7 +28,7 @@ export default class Popup {
   // открытие попап
   open() {
     this._popup.classList.add('popup_opened');
-    this.setEventListeners();
+    //this.setEventListeners();
   }
   // закрытие попап
   close() {
