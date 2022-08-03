@@ -18,6 +18,7 @@ import {  nameProfile,
   settings,
   initialCards } from './constants.js';
 import Section from './components/Section.js';
+import Popup from './components/Popup.js';
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 
@@ -39,18 +40,24 @@ const checkAddPlace = new FormValidator(settings, popupAddPlace);
 
 // открытие popup
 function openPopup(popup) {
-  popup.classList.add('popup_opened');
+  const popupElement = new Popup(popup);
+  popupElement.open();
+  popupElement.setEventListeners();
+  /* popup.classList.add('popup_opened');
   document.addEventListener('keydown', checkCloseKeyPopup);
   popup.addEventListener('mousedown', checkCloseClickPopup);
-  popup.addEventListener('click', checkCloseBtnPopup);
+  popup.addEventListener('click', checkCloseBtnPopup); */
 }
 
 // закрытие popup
 function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+  const popupElement = new Popup(popup);
+  popupElement.close();
+  popupElement.removeEventListeners();
+  /* popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', checkCloseKeyPopup);
   popup.removeEventListener('mousedown', checkCloseClickPopup);
-  popup.removeEventListener('click', checkCloseBtnPopup);
+  popup.removeEventListener('click', checkCloseBtnPopup); */
 }
 
 // открытие popup-edit-profile
@@ -77,28 +84,28 @@ function getPopupImage(name, link) {
 }
 
 // проверка области клика при закрытии popup
-function checkCloseClickPopup(evt) {
+/* function checkCloseClickPopup(evt) {
   if (evt.target === evt.currentTarget) {
     const popup = evt.currentTarget;
     closePopup(popup);
   }
-}
+} */
 
 // проверка клавиши при закрытии popup
-function checkCloseKeyPopup(evt) {
+/* function checkCloseKeyPopup(evt) {
   if (evt.key === 'Escape') {
     const popup = document.querySelector('.popup_opened');
     closePopup(popup);
   }
-}
+} */
 
 // проверка кнопки закрытия popup
-function checkCloseBtnPopup(evt) {
+/* function checkCloseBtnPopup(evt) {
   if (evt.target === evt.target.closest('.popup__close-btn')) {
     const popup = evt.currentTarget;
     closePopup(popup);
   }
-}
+} */
 
 // замена имени и описания в профиле
 function editProfileHandler(evt) {
