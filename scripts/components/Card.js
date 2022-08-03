@@ -1,11 +1,11 @@
 //класс для добавления карточек на страницу
 export default class Card {
 
-  constructor(cardSelector, data, fullImage) {
+  constructor(cardSelector, data, { handleCardClick }) {
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
-    this._fullImage = fullImage;
+    this._handleCardClick = handleCardClick;
   }
   // получаем шаблон карточки
   _getTemplate() {
@@ -19,7 +19,7 @@ export default class Card {
     this._cardImage = this._element.querySelector('.place__image');
     this._likeBtn.addEventListener('click', () => this._handleLikeClick());
     this._element.querySelector('.place__trash-btn').addEventListener('click', () => this._handleTrashClick());
-    this._cardImage.addEventListener('click', () => this._fullImage(this._title, this._image));
+    this._cardImage.addEventListener('click', () => this._handleCardClick(this._title, this._image));
   }
   // меняем состояние лайка
   _handleLikeClick() {

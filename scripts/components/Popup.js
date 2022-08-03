@@ -28,10 +28,12 @@ export default class Popup {
   // открытие попап
   open() {
     this._popup.classList.add('popup_opened');
+    this.setEventListeners();
   }
   // закрытие попап
   close() {
     this._popup.classList.remove('popup_opened');
+    this.removeEventListeners();
   }
   // установка слушателей событий клика по иконке закрытия попапа, на затемнённую область вокруг формы
   setEventListeners() {

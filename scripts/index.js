@@ -13,19 +13,25 @@ import {  nameProfile,
   linkForPlace,
   btnSubmitPlace,
   popupImagePlace,
-  imagePlace,
-  imagePlaceCaption,
+  //imagePlace,
+  //imagePlaceCaption,
   settings,
   initialCards } from './constants.js';
 import Section from './components/Section.js';
 import Popup from './components/Popup.js';
+import PopupWithImage from './components/PopupWithImage.js';
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 
 const placesList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card('#place-template', item, getPopupImage);
+    const card = new Card('#place-template', item, {
+      handleCardClick: (name, link) => {
+        const popupElement = new PopupWithImage(popupImagePlace, name, link);
+        popupElement.open();
+      }
+    });
     const cardPlace = card.generateCard();
 
     placesList.addItem(cardPlace);
@@ -42,7 +48,7 @@ const checkAddPlace = new FormValidator(settings, popupAddPlace);
 function openPopup(popup) {
   const popupElement = new Popup(popup);
   popupElement.open();
-  popupElement.setEventListeners();
+  //popupElement.setEventListeners();
   /* popup.classList.add('popup_opened');
   document.addEventListener('keydown', checkCloseKeyPopup);
   popup.addEventListener('mousedown', checkCloseClickPopup);
@@ -53,7 +59,7 @@ function openPopup(popup) {
 function closePopup(popup) {
   const popupElement = new Popup(popup);
   popupElement.close();
-  popupElement.removeEventListeners();
+  //popupElement.removeEventListeners();
   /* popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', checkCloseKeyPopup);
   popup.removeEventListener('mousedown', checkCloseClickPopup);
@@ -76,13 +82,13 @@ function getPopupAddPlace() {
 }
 
 // открытие попапа с картинкой
-function getPopupImage(name, link) {
+/* function getPopupImage(name, link) {
   imagePlace.src = link;
   imagePlace.alt = name;
   imagePlaceCaption.textContent = name;
   openPopup(popupImagePlace);
 }
-
+ */
 // проверка области клика при закрытии popup
 /* function checkCloseClickPopup(evt) {
   if (evt.target === evt.currentTarget) {
