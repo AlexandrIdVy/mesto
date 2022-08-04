@@ -6,7 +6,7 @@
 <img src="https://github.com/AlexandrIdVy/mesto/blob/main/images/demo.png">
 </div>
 
-## Проектная работа 4 - 7 (Яндекс.Практикум)
+## Проектная работа 4 - 8 (Яндекс.Практикум)
 
 Страница профиля социальной сети с фотографиями исследованных мест России.
 
@@ -31,6 +31,7 @@
   * Обработчик событий addEventListener
   * Условные конструкции, циклы, массивы
   * Валидация форм
+  * ООП
 
 
 [RU](#Место) **[EN](#Mesto)**
@@ -41,7 +42,7 @@
 <img src="https://github.com/AlexandrIdVy/mesto/blob/main/images/demo.png">
 </div>
 
-## Project work 4 - 7 (Yandex.Praktikum - additional education courses)
+## Project work 4 - 8 (Yandex.Praktikum - additional education courses)
 
 A social network profile page with photos of explored places in Russia.
 
@@ -66,3 +67,4 @@ A social network profile page with photos of explored places in Russia.
   * Method addEventListener
   * Conditional statements, loops, arrays
   * Form validation
+  * OOP
