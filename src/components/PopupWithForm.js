@@ -6,15 +6,15 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._form = form;
     this._handleSubmitForm = handleSubmitForm;
-
-    this._handleSubmit = (evt) => {
-      evt.preventDefault();
-      this._handleSubmitForm(this._getInputValues());
-    }
+    this._inputList = Array.from(this._form.querySelectorAll('.popup__form-input'));
+  }
+  // метод-колбэк
+  _handleSubmit = (evt) => {
+    evt.preventDefault();
+    this._handleSubmitForm(this._getInputValues());
   }
   // получаем данные инпутов из формы
   _getInputValues() {
-    this._inputList = this._form.querySelectorAll('.popup__form-input');
     this._formValues = {};
     this._inputList.forEach(input => {
       this._formValues[input.name] = input.value;
@@ -31,7 +31,6 @@ export default class PopupWithForm extends Popup {
   // сбрасываем данные в форме и удаляем обработчик
   close() {
     super.close();
-    this._form.removeEventListener('submit', this._handleSubmit);
     this._form.reset();
   }
 }
