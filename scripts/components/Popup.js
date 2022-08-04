@@ -28,7 +28,6 @@ export default class Popup {
   // открытие попап
   open() {
     this._popup.classList.add('popup_opened');
-    //this.setEventListeners();
   }
   // закрытие попап
   close() {
@@ -41,6 +40,7 @@ export default class Popup {
     this._popup.addEventListener('mousedown', this._checkBtnClose);
     this._popup.addEventListener('click', this._checkClickClose);
   }
+  // удаление слушателей
   removeEventListeners() {
     document.removeEventListener('keydown', this._checkEscClose);
     this._popup.removeEventListener('mousedown', this._checkBtnClose);

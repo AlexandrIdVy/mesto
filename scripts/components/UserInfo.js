@@ -1,6 +1,5 @@
 import { nameProfile,
   descriptionProfile,
-  formEditProfile,
   nameEdit,
   descriptionEdit } from '../constants.js';
 
@@ -10,17 +9,12 @@ export default class UserInfo {
     this._name = formData.name;
     this._description = formData.description;
   }
-
+  // записываем данные в форму попапа редактирования профиля
   getUserInfo() {
-    this._inputList = formEditProfile.querySelectorAll('.popup__form-input');
-    this._formValues = {};
-    this._inputList.forEach(input => {
-      this._formValues[input.name] = input.value;
-    });
-    console.log(this._formValues);
-    return this._formValues;
+    nameEdit.value = this._name;
+    descriptionEdit.value = this._description;
   }
-
+  // записываем данные в профиль
   setUserInfo() {
     nameProfile.textContent = this._name;
     descriptionProfile.textContent = this._description;

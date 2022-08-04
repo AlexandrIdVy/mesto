@@ -1,7 +1,6 @@
 export const nameProfile = document.querySelector('.profile__info-title');
 export const descriptionProfile = document.querySelector('.profile__info-subtitle');
 
-//export const places = document.querySelector('.places');
 export const places = '.places';
 
 export const btnEditProfile = document.querySelector('.profile__info-edit-btn');
@@ -9,13 +8,13 @@ export const btnAddPlace = document.querySelector('.profile__add-btn');
 
 export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 export const formEditProfile = document.forms.formEditProfile;
-export const nameEdit = formEditProfile.elements.profileName;
-export const descriptionEdit = formEditProfile.elements.profileDescription;
+export const nameEdit = formEditProfile.elements.name;
+export const descriptionEdit = formEditProfile.elements.description;
 
 export const popupAddPlace = document.querySelector('.popup_type_add-place');
 export const formAddPlace = document.forms.formAddPlace;
-export const namePlace = formAddPlace.elements.placeName;
-export const linkForPlace = formAddPlace.elements.placeLink;
+export const namePlace = formAddPlace.elements.name;
+export const linkForPlace = formAddPlace.elements.link;
 export const btnSubmitPlace = formAddPlace.querySelector('.popup__form-save-btn');
 
 export const popupImagePlace = document.querySelector('.popup_type_image-place');

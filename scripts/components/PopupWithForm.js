@@ -12,7 +12,7 @@ export default class PopupWithForm extends Popup {
       this._handleSubmitForm(this._getInputValues());
     }
   }
-
+  // получаем данные инпутов из формы
   _getInputValues() {
     this._inputList = this._form.querySelectorAll('.popup__form-input');
     this._formValues = {};
@@ -22,13 +22,13 @@ export default class PopupWithForm extends Popup {
 
     return this._formValues;
   }
-
+  // устанавливаем обработчик submit
   setEventListeners() {
     super.setEventListeners();
 
     this._form.addEventListener('submit', this._handleSubmit);
   }
-
+  // сбрасываем данные в форме и удаляем обработчик
   close() {
     super.close();
     this._form.removeEventListener('submit', this._handleSubmit);
