@@ -6,12 +6,10 @@ export default class UserInfo {
   }
   // записываем данные в форму попапа редактирования профиля
   getUserInfo() {
-    this._formValues = {
+    return {
       name: this._name.textContent,
       description: this._description.textContent
     };
-
-    return this._formValues;
   }
   // записываем данные в профиль
   setUserInfo(dataUser) {

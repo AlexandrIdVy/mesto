@@ -60,8 +60,9 @@ const popupFormPlace = new PopupWithForm(popupAddPlace, {
 
 // открытие popup-edit-profile
 function getPopupEditProfile() {
-  nameEdit.value = profile.getUserInfo().name;
-  descriptionEdit.value = profile.getUserInfo().description;
+  const dataProfile = profile.getUserInfo();
+  nameEdit.value = dataProfile.name;
+  descriptionEdit.value = dataProfile.description;
   checkEditProfile.cleanValidationError();
   popupFormEdit.open();
 }
@@ -77,12 +78,10 @@ function createCard(cardElement) {
   const card = new Card('#place-template', cardElement, {
     handleCardClick: (name, link) => {
       popupImage.open(name, link);
-      popupImage.setEventListeners();
     }
   });
-  const cardPlace = card.generateCard();
 
-  return cardPlace;
+  return card.generateCard();
 }
 
 // добавляем карточки на страницу
@@ -94,6 +93,7 @@ btnAddPlace.addEventListener('click', getPopupAddPlace);
 // добавляем обработчики submit
 popupFormEdit.setEventListeners();
 popupFormPlace.setEventListeners();
+popupImage.setEventListeners();
 
 // включаем валидацию
 checkEditProfile.enableValidation();
