@@ -3,7 +3,7 @@
 # Место
 
 <div align="center">
-<img src="https://github.com/AlexandrIdVy/mesto/blob/main/images/demo.png">
+<img src="https://github.com/AlexandrIdVy/mesto/blob/main/src/images/demo.png">
 </div>
 
 ## Проектная работа 4 - 8 (Яндекс.Практикум)
@@ -39,7 +39,7 @@
 # Mesto
 
 <div align="center">
-<img src="https://github.com/AlexandrIdVy/mesto/blob/main/images/demo.png">
+<img src="https://github.com/AlexandrIdVy/mesto/blob/main/src/images/demo.png">
 </div>
 
 ## Project work 4 - 8 (Yandex.Praktikum - additional education courses)
