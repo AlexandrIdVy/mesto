@@ -1,5 +1,6 @@
-import './index.css';
-import { userProfile,
+/* import './index.css'; */
+import { config,
+  userProfile,
   nameEdit,
   descriptionEdit,
   places,
@@ -15,9 +16,14 @@ import { userProfile,
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+//import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
+
+//создаем экземпляр класса для Api
+const api = new Api(config);
 
 //создаем экземпляр класса для валидации формы профиля
 const checkEditProfile = new FormValidator(settings, popupEditProfile);
@@ -31,14 +37,34 @@ const profile = new UserInfo(userProfile);
 // создаем экземпляр класса для попапа с картинкой
 const popupImage = new PopupWithImage(popupImagePlace);
 
-// создаем экземпляр класса для добавления карточек в указанную секцию
-const placesList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    placesList.addItem(createCard(item));
-  },
-},
-places);
+// получаем карточки по api
+api.getInitialCards()
+  .then((result) => {
+    // создаем экземпляр класса для добавления карточек в указанную секцию
+    const placesList = new Section({
+      items: result,
+      renderer: (item) => {
+        placesList.addItem(createCard(item));
+      },
+    },
+    places);
+
+    // добавляем карточки на страницу
+    placesList.render();
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+
+  api.getUserMe()
+  .then((result) => {
+    // получаем данные пользователя
+    profile.setUserInfo(result);
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+
 
 // создаем экземпляр класса для изменения данных в профиле
 const popupFormEdit = new PopupWithForm(popupEditProfile, {
@@ -62,7 +88,7 @@ const popupFormPlace = new PopupWithForm(popupAddPlace, {
 function getPopupEditProfile() {
   const dataProfile = profile.getUserInfo();
   nameEdit.value = dataProfile.name;
-  descriptionEdit.value = dataProfile.description;
+  descriptionEdit.value = dataProfile.about;
   checkEditProfile.cleanValidationError();
   popupFormEdit.open();
 }
@@ -84,9 +110,6 @@ function createCard(cardElement) {
   return card.generateCard();
 }
 
-// добавляем карточки на страницу
-placesList.render();
-
 btnEditProfile.addEventListener('click', getPopupEditProfile);
 btnAddPlace.addEventListener('click', getPopupAddPlace);
 
@@ -98,3 +121,5 @@ popupImage.setEventListeners();
 // включаем валидацию
 checkEditProfile.enableValidation();
 checkAddPlace.enableValidation();
+
+

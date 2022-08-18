@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <!-- del -->
+  <link rel="stylesheet" href="./pages/index.css">
+  <!-- del -->
   <title>Место</title>
 </head>
 <body class="page">
@@ -14,7 +16,7 @@
   <main class="content">
     <section class="profile">
       <a href="" class="profile__link-edit">
-        <img src="<%=require('./images/avatar.png')%>" alt="Аватар профиля" class="profile__avatar">
+        <img src="./images/avatar.png" alt="Аватар профиля" class="profile__avatar">
       </a>
       <div class="profile__info">
         <h1 class="profile__info-title">Жак-Ив Кусто</h1>
@@ -48,7 +50,7 @@
           class="popup__form-input popup__form-input_type_description-on"
           id="profile-description"
           placeholder="Чем Вы занимаетесь?"
-          name="description"
+          name="about"
           required
           minlength="2"
           maxlength="200">
@@ -104,6 +106,8 @@
       <button type="button" class="place__like-btn button"></button>
     </article>
   </template>
-
+<!-- del -->
+<script type="module" src="./pages/index.js"></script>
+<!-- del -->
 </body>
 </html>
