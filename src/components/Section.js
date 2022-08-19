@@ -7,12 +7,20 @@ export default class Section {
   }
   //отрисовываем элементы
   render() {
-    this._renderedItems.forEach(item => {
-      this._renderer(item);
-    });
+    this._renderedItems.getInitialCards()
+      .then(data => Array.from(data).forEach(item => {
+        this._renderer(item);
+      }))
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
   }
-  //принимаем DOM-элемент и добавляем его в контейнер
-  addItem(cardElement) {
+  //принимаем DOM-элемент и добавляем его в начало контейнера
+  addItemPrepend(cardElement) {
     this._container.prepend(cardElement);
+  }
+  //принимаем DOM-элемент и добавляем его в конец контейнера
+  addItemAppend(cardElement) {
+    this._container.append(cardElement);
   }
 }

@@ -1,8 +1,15 @@
 export default class UserInfo {
 
-  constructor(formData) {
+  constructor(formData, api) {
     this._name = document.querySelector(formData.name);
     this._about = document.querySelector(formData.about);
+    this._api = api;
+  }
+  // отправляем данные пользователя на сервер
+  sendUserInfo(dataUser) {
+    this._api.sendDataUserMe(dataUser)
+      .then(data => this.setUserInfo(data))
+      .catch(err => console.log(err));
   }
   // записываем данные в форму попапа редактирования профиля
   getUserInfo() {

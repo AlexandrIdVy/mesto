@@ -8,7 +8,7 @@ export default class PopupWithForm extends Popup {
     this._handleSubmitForm = handleSubmitForm;
     this._inputList = Array.from(this._form.querySelectorAll('.popup__form-input'));
   }
-  // метод-колбэк
+  // передаем объект инпутов
   _handleSubmit = (evt) => {
     evt.preventDefault();
     this._handleSubmitForm(this._getInputValues());

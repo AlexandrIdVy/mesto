@@ -11,8 +11,7 @@ import { config,
   popupAddPlace,
   formAddPlace,
   popupImagePlace,
-  settings,
-  initialCards } from '../utils/constants.js';
+  settings } from '../utils/constants.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -32,45 +31,35 @@ const checkEditProfile = new FormValidator(settings, popupEditProfile);
 const checkAddPlace = new FormValidator(settings, popupAddPlace);
 
 // создаем экземпляр класса для профиля
-const profile = new UserInfo(userProfile);
+const profile = new UserInfo(userProfile, api);
+
+// получаем данные пользователя с сервера
+api.getUserMe()
+  .then((res) => {
+    // получаем данные пользователя
+    profile.setUserInfo(res);
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+
+// получаем карточки с сервера
+const placesList = new Section({
+  items: api,
+  renderer: (item) => {
+    placesList.addItemAppend(createCard(item));
+  },
+},
+places);
 
 // создаем экземпляр класса для попапа с картинкой
 const popupImage = new PopupWithImage(popupImagePlace);
-
-// получаем карточки по api
-api.getInitialCards()
-  .then((result) => {
-    // создаем экземпляр класса для добавления карточек в указанную секцию
-    const placesList = new Section({
-      items: result,
-      renderer: (item) => {
-        placesList.addItem(createCard(item));
-      },
-    },
-    places);
-
-    // добавляем карточки на страницу
-    placesList.render();
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
-
-  api.getUserMe()
-  .then((result) => {
-    // получаем данные пользователя
-    profile.setUserInfo(result);
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
-
 
 // создаем экземпляр класса для изменения данных в профиле
 const popupFormEdit = new PopupWithForm(popupEditProfile, {
   form: formEditProfile,
   handleSubmitForm: (dataUser) => {
-    profile.setUserInfo(dataUser);
+    profile.sendUserInfo(dataUser);
     popupFormEdit.close();
   }
 });
@@ -79,7 +68,14 @@ const popupFormEdit = new PopupWithForm(popupEditProfile, {
 const popupFormPlace = new PopupWithForm(popupAddPlace, {
   form: formAddPlace,
   handleSubmitForm: (formData) => {
-    placesList.addItem(createCard(formData));
+    // отправляем карточку на сервер
+    api.sendCard(formData)
+      .then((res) => {
+        placesList.addItemPrepend(createCard(res))
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
     popupFormPlace.close();
   }
 });
@@ -101,7 +97,7 @@ function getPopupAddPlace() {
 
 // создание карточки
 function createCard(cardElement) {
-  const card = new Card('#place-template', cardElement, {
+  const card = new Card('#place-template', cardElement, api, {
     handleCardClick: (name, link) => {
       popupImage.open(name, link);
     }
@@ -109,6 +105,9 @@ function createCard(cardElement) {
 
   return card.generateCard();
 }
+
+// добавляем карточки на страницу
+placesList.render();
 
 btnEditProfile.addEventListener('click', getPopupEditProfile);
 btnAddPlace.addEventListener('click', getPopupAddPlace);

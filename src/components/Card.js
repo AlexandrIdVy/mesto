@@ -1,11 +1,15 @@
 //класс для добавления карточек на страницу
 export default class Card {
 
-  constructor(cardSelector, data, { handleCardClick }) {
+  constructor(cardSelector, data, api, { handleCardClick }) {
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._api = api;
+  }
+  sendingCards() {
+
   }
   // получаем шаблон карточки
   _getTemplate() {
