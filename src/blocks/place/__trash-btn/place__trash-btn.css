@@ -9,3 +9,7 @@
   background-image: url(../../../images/Trash.svg);
   background-size: contain;
 }
+
+.place__trash-btn:disabled {
+  display: none;
+}

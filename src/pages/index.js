@@ -11,11 +11,12 @@ import { config,
   popupAddPlace,
   formAddPlace,
   popupImagePlace,
+  popupComfirmation,
   settings } from '../utils/constants.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-//import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
@@ -35,13 +36,8 @@ const profile = new UserInfo(userProfile, api);
 
 // получаем данные пользователя с сервера
 api.getUserMe()
-  .then((res) => {
-    // получаем данные пользователя
-    profile.setUserInfo(res);
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
+  .then(res => profile.setUserInfo(res))
+  .catch(err => showError(err));
 
 // получаем карточки с сервера
 const placesList = new Section({
@@ -50,10 +46,13 @@ const placesList = new Section({
     placesList.addItemAppend(createCard(item));
   },
 },
-places);
+places, showError);
 
 // создаем экземпляр класса для попапа с картинкой
 const popupImage = new PopupWithImage(popupImagePlace);
+
+// создаем экземпляр класса для попапа с подтверждением
+const popupConfirm = new PopupWithConfirmation(popupComfirmation);
 
 // создаем экземпляр класса для изменения данных в профиле
 const popupFormEdit = new PopupWithForm(popupEditProfile, {
@@ -70,12 +69,8 @@ const popupFormPlace = new PopupWithForm(popupAddPlace, {
   handleSubmitForm: (formData) => {
     // отправляем карточку на сервер
     api.sendCard(formData)
-      .then((res) => {
-        placesList.addItemPrepend(createCard(res))
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      });
+      .then(res => placesList.addItemPrepend(createCard(res)))
+      .catch(err => showError(err));
     popupFormPlace.close();
   }
 });
@@ -100,10 +95,18 @@ function createCard(cardElement) {
   const card = new Card('#place-template', cardElement, api, {
     handleCardClick: (name, link) => {
       popupImage.open(name, link);
+    },
+    handleTrashClick: () => {
+      popupConfirm.open();
     }
   });
 
   return card.generateCard();
+}
+
+// вывод ошибки запроса
+function showError(err) {
+  console.log(err);
 }
 
 // добавляем карточки на страницу
@@ -116,6 +119,7 @@ btnAddPlace.addEventListener('click', getPopupAddPlace);
 popupFormEdit.setEventListeners();
 popupFormPlace.setEventListeners();
 popupImage.setEventListeners();
+popupConfirm.setEventListeners();
 
 // включаем валидацию
 checkEditProfile.enableValidation();

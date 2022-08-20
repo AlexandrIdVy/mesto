@@ -22,6 +22,7 @@ export const namePlace = formAddPlace.elements.name;
 export const linkForPlace = formAddPlace.elements.link;
 
 export const popupImagePlace = '.popup_type_image-place';
+export const popupComfirmation = '.popup_type_confirm';
 
 export const userProfile = {
   name: '.profile__info-title',
@@ -30,8 +31,8 @@ export const userProfile = {
 export const settings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
-  submitButtonSelector: '.popup__form-save-btn',
-  inactiveButtonClass: 'popup__form-save-btn_type_no-active',
+  submitButtonSelector: '.popup__form-confirm-btn',
+  inactiveButtonClass: 'popup__form-confirm-btn_type_no-active',
   inputErrorClass: 'popup__form-input_type_error',
   errorClass: 'popup__form-input-error_visible'
 };
