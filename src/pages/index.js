@@ -6,12 +6,17 @@ import { config,
   places,
   btnEditProfile,
   btnAddPlace,
+  btnEditAvatar,
   popupEditProfile,
   formEditProfile,
   popupAddPlace,
   formAddPlace,
   popupImagePlace,
   popupComfirmation,
+  formEditAvatar,
+  linkForAvatar,
+  popupEditAvatar,
+  avatar,
   settings } from '../utils/constants.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -31,8 +36,11 @@ const checkEditProfile = new FormValidator(settings, popupEditProfile);
 // создаем экземпляр класса для валидации формы добавления карточки
 const checkAddPlace = new FormValidator(settings, popupAddPlace);
 
+// создаем экземпляр класса для валидации формы добавления карточки
+const checkEditAvatar = new FormValidator(settings, popupEditAvatar);
+
 // создаем экземпляр класса для профиля
-const profile = new UserInfo(userProfile, api);
+const profile = new UserInfo(userProfile, api, showError);
 
 // получаем данные пользователя с сервера
 api.getUserMe()
@@ -52,7 +60,7 @@ places, showError);
 const popupImage = new PopupWithImage(popupImagePlace);
 
 // создаем экземпляр класса для попапа с подтверждением
-const popupConfirm = new PopupWithConfirmation(popupComfirmation);
+const popupConfirm = new PopupWithConfirmation(popupComfirmation, api, showError);
 
 // создаем экземпляр класса для изменения данных в профиле
 const popupFormEdit = new PopupWithForm(popupEditProfile, {
@@ -75,6 +83,15 @@ const popupFormPlace = new PopupWithForm(popupAddPlace, {
   }
 });
 
+// создаем экземпляр класса для изменения аватара профиля
+const popupFormEditAvatar = new PopupWithForm(popupEditAvatar, {
+  form: formEditAvatar,
+  handleSubmitForm: (avatar) => {
+    profile.sendUserAvatar(avatar);
+    popupFormEditAvatar.close();
+  }
+});
+
 // открытие popup-edit-profile
 function getPopupEditProfile() {
   const dataProfile = profile.getUserInfo();
@@ -90,14 +107,21 @@ function getPopupAddPlace() {
   popupFormPlace.open();
 }
 
+// открытие popup-add-avatar
+function getPopupEditAvatar() {
+  linkForAvatar.value = avatar.src;
+  checkEditAvatar.cleanValidationError();
+  popupFormEditAvatar.open();
+}
+
 // создание карточки
 function createCard(cardElement) {
-  const card = new Card('#place-template', cardElement, api, {
+  const card = new Card('#place-template', cardElement, api, showError, {
     handleCardClick: (name, link) => {
       popupImage.open(name, link);
     },
-    handleTrashClick: () => {
-      popupConfirm.open();
+    handleTrashClick: (cardId, element) => {
+      popupConfirm.open(cardId, element);
     }
   });
 
@@ -114,15 +138,18 @@ placesList.render();
 
 btnEditProfile.addEventListener('click', getPopupEditProfile);
 btnAddPlace.addEventListener('click', getPopupAddPlace);
+btnEditAvatar.addEventListener('click', getPopupEditAvatar);
 
 // добавляем обработчики submit
 popupFormEdit.setEventListeners();
 popupFormPlace.setEventListeners();
 popupImage.setEventListeners();
 popupConfirm.setEventListeners();
+popupFormEditAvatar.setEventListeners();
 
 // включаем валидацию
 checkEditProfile.enableValidation();
 checkAddPlace.enableValidation();
+checkEditAvatar.enableValidation();
 
 

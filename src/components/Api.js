@@ -49,5 +49,39 @@ export default class Api {
     })
       .then(res => this._handlePromise(res));
   }
-
+  // удаляем карточку с сервера
+  deleteCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then(res => this._handlePromise(res));
+  }
+  // добавляем лайк
+  addLike(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+      .then(res => this._handlePromise(res));
+  }
+  // удаляем лайк
+  removeLike(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then(res => this._handlePromise(res));
+  }
+  // меняем аватар
+  editAvatar(dataUser) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: dataUser.avatar,
+      })
+    })
+      .then(res => this._handlePromise(res));
+  }
 }
