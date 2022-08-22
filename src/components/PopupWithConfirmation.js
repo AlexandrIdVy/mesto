@@ -14,6 +14,7 @@ export default class PopupWithConfirmation extends Popup {
       .then(() => {
         element.remove();
         element = null;
+        this.close();
       })
       .catch(err => this._showError(err));
   }
@@ -21,10 +22,7 @@ export default class PopupWithConfirmation extends Popup {
   setEventListeners() {
     super.setEventListeners();
 
-    this._confirmBtn.addEventListener('click', () => {
-      this._handleClick(this._cardId, this._element)
-      this.close();
-    });
+    this._confirmBtn.addEventListener('click', () => this._handleClick(this._cardId, this._element));
   }
 
   open(cardId, element) {

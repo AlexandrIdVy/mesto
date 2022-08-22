@@ -1,7 +1,7 @@
 //класс для добавления карточек на страницу
 export default class Card {
 
-  constructor(cardSelector, data, api, showError, { handleCardClick, handleTrashClick }) {
+  constructor(cardSelector, data, api, showError, userId, { handleCardClick, handleTrashClick }) {
     this._cardSelector = cardSelector;
     this._title = data.name;
     this._image = data.link;
@@ -10,6 +10,7 @@ export default class Card {
     this._cardId = data._id;
     this._api = api;
     this._showError = showError;
+    this._userId = userId;
     this._handleCardClick = handleCardClick;
     this._handleTrashClick = handleTrashClick;
   }
@@ -25,19 +26,26 @@ export default class Card {
     this._likeBtn = this._element.querySelector('.place__like-btn');
     this._cardImage = this._element.querySelector('.place__image');
     this._trashBtn = this._element.querySelector('.place__trash-btn');
-    this._likeBtn.addEventListener('click', () => this._handleLikeClick());
-    this._addListenerTrashBtn();
+
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._title, this._image));
-  }
-  // меняем состояние лайка
-  _handleLikeClick() {
-    if (this._likeBtn.classList.contains('place__like-btn_active')) {
-      this._removeLikeCard();
+
+    this._likeBtn.addEventListener('click', () => {
+      if (this._likeBtn.classList.contains('place__like-btn_active')) {
+        this._removeLikeCard();
+      }
+      else {
+        this._addLikeCard();
+      }
+    });
+
+    if (this._owner !== this._userId) {
+      this._trashBtn.disabled = true;
     }
     else {
-      this._addLikeCard();
+      this._trashBtn.addEventListener('click', () => this._handleTrashClick(this._cardId, this._element));
     }
   }
+  // добавляем лайк
   _addLikeCard() {
     this._api.addLike(this._cardId)
     .then((card) => {
@@ -53,6 +61,7 @@ export default class Card {
     })
     .catch(err => this._showError(err));
   }
+  // удаляем лайк
   _removeLikeCard() {
     this._api.removeLike(this._cardId)
     .then((card) => {
@@ -73,15 +82,6 @@ export default class Card {
     if (this._like.length > 0) {
       this._likeContainer.textContent = this._like.length;
       this._likeContainer.classList.add('place__like-value_type_on');
-    }
-  }
-  // добавляем обработчик кнопки удаления карчточки
-  _addListenerTrashBtn() {
-    if (this._owner !== 'c1f67b72925e91ec75ff78f4') {
-      this._trashBtn.disabled = true;
-    }
-    else {
-      this._trashBtn.addEventListener('click', () => this._handleTrashClick(this._cardId, this._element));
     }
   }
   // создаем карточку

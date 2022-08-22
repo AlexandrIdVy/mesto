@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
     this._handleSubmitForm = handleSubmitForm;
     this._inputList = Array.from(this._form.querySelectorAll('.popup__form-input'));
     this._btnConfirm = this._popup.querySelector('.popup__form-confirm-btn');
+    this._text = this._btnConfirm.textContent;
   }
   // передаем объект инпутов
   _handleSubmit = (evt) => {
@@ -28,11 +29,6 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
 
     this._form.addEventListener('submit', this._handleSubmit);
-  }
-  // открытие попап
-  open() {
-    super.open();
-    this._text = this._btnConfirm.textContent;
   }
   // сбрасываем данные в форме и удаляем обработчик
   close() {

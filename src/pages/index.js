@@ -1,4 +1,7 @@
 import './index.css';
+
+let userId = '';
+
 import { config,
   userProfile,
   nameEdit,
@@ -44,7 +47,10 @@ const profile = new UserInfo(userProfile);
 
 // получаем данные пользователя с сервера
 api.getUserMe()
-  .then(res => profile.setUserInfo(res))
+  .then(res => {
+    profile.setUserInfo(res);
+    userId = res._id;
+  })
   .catch(err => showError(err));
 
 // получаем карточки с сервера
@@ -68,10 +74,12 @@ const popupFormEdit = new PopupWithForm(popupEditProfile, {
   handleSubmitForm: (dataUser) => {
     popupFormEdit.renderLoading(true);
     api.sendDataUserMe(dataUser)
-      .then(data => profile.setUserInfo(data))
+      .then(data => {
+        profile.setUserInfo(data);
+        popupFormEdit.close();
+      })
       .catch(err => showError(err))
       .finally(() => popupFormEdit.renderLoading(false));
-    popupFormEdit.close();
   }
 });
 
@@ -97,10 +105,12 @@ const popupFormEditAvatar = new PopupWithForm(popupEditAvatar, {
   handleSubmitForm: (avatar) => {
     popupFormEditAvatar.renderLoading(true);
     api.editAvatar(avatar)
-      .then(data => profile.setUserInfo(data))
+      .then(data => {
+        profile.setUserInfo(data);
+        popupFormEditAvatar.close();
+      })
       .catch(err => showError(err))
       .finally(() => popupFormEditAvatar.renderLoading(false));
-    popupFormEditAvatar.close();
   }
 });
 
@@ -128,7 +138,7 @@ function getPopupEditAvatar() {
 
 // создание карточки
 function createCard(cardElement) {
-  const card = new Card('#place-template', cardElement, api, showError, {
+  const card = new Card('#place-template', cardElement, api, showError, userId, {
     handleCardClick: (name, link) => {
       popupImage.open(name, link);
     },
