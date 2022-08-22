@@ -1,4 +1,4 @@
-/* import './index.css'; */
+import './index.css';
 import { config,
   userProfile,
   nameEdit,
@@ -40,7 +40,7 @@ const checkAddPlace = new FormValidator(settings, popupAddPlace);
 const checkEditAvatar = new FormValidator(settings, popupEditAvatar);
 
 // создаем экземпляр класса для профиля
-const profile = new UserInfo(userProfile, api, showError);
+const profile = new UserInfo(userProfile);
 
 // получаем данные пользователя с сервера
 api.getUserMe()
@@ -66,7 +66,11 @@ const popupConfirm = new PopupWithConfirmation(popupComfirmation, api, showError
 const popupFormEdit = new PopupWithForm(popupEditProfile, {
   form: formEditProfile,
   handleSubmitForm: (dataUser) => {
-    profile.sendUserInfo(dataUser);
+    popupFormEdit.renderLoading(true);
+    api.sendDataUserMe(dataUser)
+      .then(data => profile.setUserInfo(data))
+      .catch(err => showError(err))
+      .finally(() => popupFormEdit.renderLoading(false));
     popupFormEdit.close();
   }
 });
@@ -76,10 +80,14 @@ const popupFormPlace = new PopupWithForm(popupAddPlace, {
   form: formAddPlace,
   handleSubmitForm: (formData) => {
     // отправляем карточку на сервер
+    popupFormPlace.renderLoading(true);
     api.sendCard(formData)
-      .then(res => placesList.addItemPrepend(createCard(res)))
-      .catch(err => showError(err));
-    popupFormPlace.close();
+      .then((res) => {
+        placesList.addItemPrepend(createCard(res));
+        popupFormPlace.close();
+      })
+      .catch(err => showError(err))
+      .finally(() => popupFormPlace.renderLoading(false));
   }
 });
 
@@ -87,7 +95,11 @@ const popupFormPlace = new PopupWithForm(popupAddPlace, {
 const popupFormEditAvatar = new PopupWithForm(popupEditAvatar, {
   form: formEditAvatar,
   handleSubmitForm: (avatar) => {
-    profile.sendUserAvatar(avatar);
+    popupFormEditAvatar.renderLoading(true);
+    api.editAvatar(avatar)
+      .then(data => profile.setUserInfo(data))
+      .catch(err => showError(err))
+      .finally(() => popupFormEditAvatar.renderLoading(false));
     popupFormEditAvatar.close();
   }
 });
