@@ -45,22 +45,23 @@ const checkEditAvatar = new FormValidator(settings, popupEditAvatar);
 // создаем экземпляр класса для профиля
 const profile = new UserInfo(userProfile);
 
-// получаем данные пользователя с сервера
-api.getUserMe()
-  .then(res => {
-    profile.setUserInfo(res);
-    userId = res._id;
-  })
-  .catch(err => showError(err));
-
 // получаем карточки с сервера
 const placesList = new Section({
-  items: api,
   renderer: (item) => {
     placesList.addItemAppend(createCard(item));
   },
 },
-places, showError);
+places);
+
+Promise.all([api.getUserMe(), api.getInitialCards()])
+  .then(([dataUser, cards]) => {
+    // получаем данные пользователя с сервера
+    profile.setUserInfo(dataUser);
+    userId = dataUser._id;
+    // добавляем карточки на страницу
+    placesList.render(cards);
+  })
+  .catch(err => showError(err));
 
 // создаем экземпляр класса для попапа с картинкой
 const popupImage = new PopupWithImage(popupImagePlace);
@@ -154,9 +155,6 @@ function createCard(cardElement) {
 function showError(err) {
   console.log(err);
 }
-
-// добавляем карточки на страницу
-placesList.render();
 
 btnEditProfile.addEventListener('click', getPopupEditProfile);
 btnAddPlace.addEventListener('click', getPopupAddPlace);

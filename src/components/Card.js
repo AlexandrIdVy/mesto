@@ -5,7 +5,7 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._title = data.name;
     this._image = data.link;
-    this._like = data.likes;
+    this._likes = data.likes;
     this._owner = data.owner._id;
     this._cardId = data._id;
     this._api = api;
@@ -79,9 +79,14 @@ export default class Card {
   }
   // добавляем счетчик лайков
   _addLikeValue() {
-    if (this._like.length > 0) {
-      this._likeContainer.textContent = this._like.length;
+    if (this._likes.length > 0) {
+      this._likeContainer.textContent = this._likes.length;
       this._likeContainer.classList.add('place__like-value_type_on');
+      this._likes.forEach(element => {
+        if (element._id === this._userId) {
+          this._likeBtn.classList.add('place__like-btn_active');
+        }
+      });
     }
   }
   // создаем карточку
